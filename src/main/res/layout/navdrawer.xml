@@ -39,7 +39,7 @@
                     android:id="@+id/imgDrawerHeader"
                     android:adjustViewBounds="true"
                     android:src="@drawable/img_navdrawerheader"
-                    android:text="Materialdesign"
+                    android:text="@string/app_name"
                     android:gravity="bottom"
                     android:textSize="25dp"
                     android:textColor="#ffffff"

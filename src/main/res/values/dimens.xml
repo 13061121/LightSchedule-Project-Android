@@ -5,4 +5,7 @@
     <dimen name="headerbar_elevation">4dp</dimen>
     <dimen name="navdrawer_width">260dp</dimen>
     <dimen name="text_size_small">13sp</dimen>
+    <dimen name="text_size_headline">24sp</dimen>
+    <dimen name="list_head_left_item_length">72dp</dimen>
+    <dimen name="margin_top_bottom">8dp</dimen>
 </resources>

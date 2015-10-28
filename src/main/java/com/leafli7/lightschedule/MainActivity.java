@@ -2,6 +2,7 @@ package com.leafli7.lightschedule;
 
 
 import android.content.res.Resources;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lightschedule.R;
+import com.leafli7.lightschedule.fragment.DayScheduleFragment;
+
+import java.util.HashMap;
 
 import SlidingTabs.SlidingTabLayout;
 
@@ -55,7 +59,9 @@ public class MainActivity extends ActionBarActivity {
         Resources res = getResources();
         mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.tab_indicator_color));
         mSlidingTabLayout.setDistributeEvenly(true);
-        mViewPager.setAdapter(new MainTabs());
+        MainTabs mainTabs = new MainTabs();
+        mainTabs.initial();
+        mViewPager.setAdapter(mainTabs);
 
         mSlidingTabLayout.setViewPager(mViewPager);
 
@@ -145,8 +151,19 @@ public class MainActivity extends ActionBarActivity {
      */
     class MainTabs extends PagerAdapter {
         String[] week = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        HashMap<String, DayScheduleFragment> fragmentHashMap = new HashMap<String, DayScheduleFragment>();
 
         SparseArray<View> views = new SparseArray<View>();
+
+        public void initial(){
+            for (String day : week){
+                DayScheduleFragment curFragment = new DayScheduleFragment();
+                fragmentHashMap.put(day, curFragment);
+                getSupportFragmentManager().beginTransaction().add(curFragment, day).commit();
+            }
+
+
+        }
 
         /**
          * @return the number of pages to display
@@ -183,6 +200,13 @@ public class MainActivity extends ActionBarActivity {
          */
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+            if (position == 0) {
+                View viewTest = fragmentHashMap.get(week[position]).getView();
+                container.addView(viewTest);
+                views.put(position, viewTest);
+                return viewTest;
+            }
+
             // Inflate a new layout from our resources
             View view = getLayoutInflater().inflate(R.layout.pager_item,
                     container, false);
