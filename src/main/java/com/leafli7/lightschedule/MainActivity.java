@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.Menu;
@@ -23,22 +24,30 @@ import android.widget.Toast;
 import com.example.lightschedule.R;
 import com.leafli7.lightschedule.fragment.DayScheduleFragment;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import SlidingTabs.SlidingTabLayout;
 
-
+/**
+ * @author leafli7
+ */
 public class MainActivity extends ActionBarActivity {
+
+    String TAG;
 
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout mDrawerLayout;
     SlidingTabLayout mSlidingTabLayout;
     ViewPager mViewPager;
-
+    ViewPager.OnPageChangeListener mSlidingTabLayoutOnPageChangeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        TAG = getClass().getSimpleName();
         setContentView(R.layout.activity_main);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
@@ -60,31 +69,39 @@ public class MainActivity extends ActionBarActivity {
         mSlidingTabLayout.setSelectedIndicatorColors(res.getColor(R.color.tab_indicator_color));
         mSlidingTabLayout.setDistributeEvenly(true);
         MainTabs mainTabs = new MainTabs();
-        mainTabs.initial();
         mViewPager.setAdapter(mainTabs);
-
+        //TODO
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        int curDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+        Log.e(TAG, "DAY_OF_WEEK : " + String.valueOf(cal.get(Calendar.DAY_OF_WEEK)));
+        curDayOfWeek = curDayOfWeek-1 == 0 ? 6 : curDayOfWeek-1;
+        Log.e(TAG, "DAY_OF_WEEK : " + String.valueOf(curDayOfWeek));
+        mViewPager.setCurrentItem(curDayOfWeek-1);   //leafli7 设置初始week选择
         mSlidingTabLayout.setViewPager(mViewPager);
 
         // Tab events
+        mSlidingTabLayoutOnPageChangeListener = new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset,
+                                       int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Log.e(TAG, "page : " + position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        };
         if (mSlidingTabLayout != null) {
-            mSlidingTabLayout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset,
-                                           int positionOffsetPixels) {
-
-                }
-
-                @Override
-                public void onPageSelected(int position) {
-
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-
-                }
-            });
+            mSlidingTabLayout.setOnPageChangeListener(mSlidingTabLayoutOnPageChangeListener);
         }
+
 
         // Click events for Navigation Drawer
         LinearLayout navButton = (LinearLayout) findViewById(R.id.txtNavButton);
@@ -155,15 +172,14 @@ public class MainActivity extends ActionBarActivity {
 
         SparseArray<View> views = new SparseArray<View>();
 
-        public void initial(){
+        public MainTabs(){
             for (String day : week){
                 DayScheduleFragment curFragment = new DayScheduleFragment();
                 fragmentHashMap.put(day, curFragment);
                 getSupportFragmentManager().beginTransaction().add(curFragment, day).commit();
             }
-
-
         }
+
 
         /**
          * @return the number of pages to display
@@ -200,25 +216,10 @@ public class MainActivity extends ActionBarActivity {
          */
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            if (position == 0) {
-                View viewTest = fragmentHashMap.get(week[position]).getView();
-                container.addView(viewTest);
-                views.put(position, viewTest);
-                return viewTest;
-            }
-
-            // Inflate a new layout from our resources
-            View view = getLayoutInflater().inflate(R.layout.pager_item,
-                    container, false);
-            TextView txt = (TextView) view.findViewById(R.id.item_subtitle);
-            txt.setText("Content: " + (position + 1));
-            // Add the newly created View to the ViewPager
-            container.addView(view);
-
-            views.put(position, view);
-
-            // Return the View
-            return view;
+            View viewTest = fragmentHashMap.get(week[position]).getView();
+            container.addView(viewTest);
+            views.put(position, viewTest);
+            return viewTest;
         }
 
         /**

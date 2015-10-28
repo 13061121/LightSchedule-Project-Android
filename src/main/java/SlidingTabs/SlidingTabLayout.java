@@ -2,9 +2,11 @@ package SlidingTabs;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.nfc.Tag;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -32,6 +34,7 @@ import android.widget.TextView;
  * providing the layout ID of your custom layout.
  */
 public class SlidingTabLayout extends HorizontalScrollView {
+    private String TAG = getClass().getSimpleName();
     /**
      * Allows complete control over the colors drawn in the tab layout. Set with
      * {@link #setCustomTabColorizer(TabColorizer)}.
@@ -137,7 +140,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         mViewPager = viewPager;
         if (viewPager != null) {
-            viewPager.setOnPageChangeListener(new InternalViewPagerListener());
+            InternalViewPagerListener internalViewPagerListener = new InternalViewPagerListener();
+            viewPager.setOnPageChangeListener(internalViewPagerListener);
             populateTabStrip();
         }
     }
@@ -286,6 +290,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
             if (mViewPagerPageChangeListener != null) {
                 mViewPagerPageChangeListener.onPageSelected(position);
             }
+
+            Log.e(TAG, "InternalViewPagerListener onPageSelected : " + position);
         }
 
     }
