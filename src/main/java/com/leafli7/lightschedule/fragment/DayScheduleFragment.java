@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.lightschedule.R;
+import com.leafli7.lightschedule.Adapter.DayScheduleAdapter;
 
 import java.util.HashMap;
 
@@ -20,6 +22,7 @@ import java.util.HashMap;
 public class DayScheduleFragment extends Fragment {
 
     String TAG = getClass().getSimpleName();
+    private ListView lvDayScheduleListView;
 
     public DayScheduleFragment() {
         // Required empty public constructor
@@ -30,8 +33,8 @@ public class DayScheduleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_day_schedule, container, false);
-        return inflater.inflate(R.layout.day_schedule_list_item, container, false);
+        return inflater.inflate(R.layout.fragment_day_schedule, container, false);
+//        return inflater.inflate(R.layout.day_schedule_list_item, container, false);
     }
 
 
@@ -39,15 +42,20 @@ public class DayScheduleFragment extends Fragment {
     public void onStart() {
         super.onStart();
         View view = getView();
-        LinearLayout mainLl = (LinearLayout) view.findViewById(R.id.mainLl);
-        mainLl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "linear layout clicked!", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "linear layout clicked!");
-            }
-        });
-        Log.e(TAG, "asd");
+//        LinearLayout mainLl = (LinearLayout) view.findViewById(R.id.mainLl);
+//        mainLl.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getActivity(), "linear layout clicked!", Toast.LENGTH_SHORT).show();
+//                Log.e(TAG, "linear layout clicked!");
+//            }
+//        });
+
+
+        lvDayScheduleListView = (ListView) view.findViewById(R.id.lvDayScheduleListView);
+        lvDayScheduleListView.setAdapter(new DayScheduleAdapter(getActivity()));
+
+        Log.e(TAG, TAG + " onStart");
     }
 
 }
