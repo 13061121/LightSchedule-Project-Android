@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/vertical_item_high72"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/llMainLessonInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/llHideInfo"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvLessonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:textColor="#424242"
+            android:textSize="@dimen/abc_text_size_title_material" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="@dimen/margin_top_bottom" />
+
+        <TextView
+            android:id="@+id/tvLessonClassroom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="room"
+            android:textColor="#424242"
+            android:textSize="@dimen/abc_text_size_title_material" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llHideInfo"
+        android:layout_width="@dimen/margin_left_right_twice"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTinyLesson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="后"
+            android:textColor="@color/material_grey_600"
+            android:textSize="@dimen/abc_text_size_title_material" />
+
+        <Space
+            android:layout_width="1dp"
+            android:layout_height="@dimen/margin_top_bottom" />
+
+        <TextView
+            android:id="@+id/tvSingleWeekLesson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="双"
+            android:textColor="@color/material_grey_600"
+            android:textSize="@dimen/abc_text_size_title_material" />
+
+    </LinearLayout>
+
+</RelativeLayout>

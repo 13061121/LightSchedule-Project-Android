@@ -2,7 +2,6 @@ package com.leafli7.lightschedule;
 
 
 import android.content.res.Resources;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -23,10 +22,8 @@ import android.widget.Toast;
 
 import com.example.lightschedule.R;
 import com.leafli7.lightschedule.Utils.Constant;
-import com.leafli7.lightschedule.fragment.DayScheduleFragment;
+import com.leafli7.lightschedule.Fragment.DayScheduleFragment;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 import SlidingTabs.SlidingTabLayout;

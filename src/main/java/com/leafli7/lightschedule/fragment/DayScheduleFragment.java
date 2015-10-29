@@ -1,7 +1,6 @@
-package com.leafli7.lightschedule.fragment;
+package com.leafli7.lightschedule.Fragment;
 
 
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;

@@ -46,6 +46,6 @@ public abstract class Constant {
         cal.setTime(new Date());
         int curDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
         curDayOfWeek = curDayOfWeek-1 == 0 ? 6 : curDayOfWeek-1;
-        CURRENT_DAY_OF_WEEK = curDayOfWeek;
+        CURRENT_DAY_OF_WEEK = curDayOfWeek - 1;
     }
 }

@@ -12,9 +12,8 @@ import android.widget.Toast;
 import com.example.lightschedule.R;
 import com.leafli7.lightschedule.Entity.SingleLessonTime;
 import com.leafli7.lightschedule.Utils.Constant;
-import com.leafli7.lightschedule.fragment.DayScheduleFragment;
+import com.leafli7.lightschedule.View.LessonItemLayout;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
 /**
@@ -58,21 +57,11 @@ public class DayScheduleAdapter extends BaseAdapter {
         llMain = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.day_schedule_list_item, null);
 
         LinearLayout llSingleLessonTime = (LinearLayout) llMain.findViewById(R.id.llSingleLessonTime);
+        LessonItemLayout lessonItemLayout = new LessonItemLayout(context, 123);
+        lessonItemLayout.setFocusable(true);
+        llSingleLessonTime.addView(lessonItemLayout);
         TextView tvLessonNum = (TextView) llMain.findViewById(R.id.tvLessonNum);
         TextView tvLessonTime = (TextView) llMain.findViewById(R.id.tvLessonTime);
-
-        //leafli7 test addview
-        TextView tvTest = new TextView(context);
-        tvTest.setText("TEST TEST TEST");
-        tvTest.setFocusable(true);
-        tvTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "@!$@#$@#", Toast.LENGTH_SHORT).show();
-            }
-        });
-        llSingleLessonTime.addView(tvTest);
-
 
         tvLessonNum.setText(lessonNum[position]);
         tvLessonTime.setText(lessonTime[position]);

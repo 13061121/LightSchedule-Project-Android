@@ -8,4 +8,6 @@
     <dimen name="list_head_left_item_length">72dp</dimen>
     <dimen name="margin_top_bottom">8dp</dimen>
     <dimen name="margin_left_right">16dp</dimen>
+    <dimen name="margin_left_right_twice">32dp</dimen>
+    <dimen name="vertical_item_high72">72dp</dimen>
 </resources>
