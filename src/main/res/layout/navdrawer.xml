@@ -54,7 +54,7 @@
                     android:layout_height="20dp"
                     android:fontFamily="sans-serif"
                     android:textColor="#E9E9E9"
-                    android:text="Template"
+                    android:text="For you, for simple life."
                     android:paddingLeft="16dp"
                     android:layout_marginBottom="5dp"
                     android:textSize="15dp"

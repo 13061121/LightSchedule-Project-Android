@@ -20,11 +20,11 @@
             android:layout_height="wrap_content"
             android:text="编译原理"
             android:textColor="#424242"
-            android:textSize="@dimen/abc_text_size_headline_material" />
+            android:textSize="@dimen/abc_text_size_title_material" />
 
         <Space
             android:layout_width="1dp"
-            android:layout_height="@dimen/margin_top_bottom" />
+            android:layout_height="@dimen/headerbar_elevation" />
 
         <TextView
             android:id="@+id/tvLessonClassroom"
@@ -52,10 +52,6 @@
             android:text="后"
             android:textColor="@color/material_grey_600"
             android:textSize="@dimen/abc_text_size_subhead_material" />
-
-        <Space
-            android:layout_width="1dp"
-            android:layout_height="@dimen/margin_top_bottom" />
 
         <TextView
             android:id="@+id/tvSingleWeekLesson"

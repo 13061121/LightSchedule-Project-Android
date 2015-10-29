@@ -59,11 +59,17 @@ public class DayScheduleAdapter extends BaseAdapter {
         LinearLayout llSingleLessonTime = (LinearLayout) llMain.findViewById(R.id.llSingleLessonTime);
         LessonItemLayout lessonItemLayout = new LessonItemLayout(context, 123);
         lessonItemLayout.setFocusable(true);
+        lessonItemLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
         llSingleLessonTime.addView(lessonItemLayout);
 
-        lessonItemLayout = new LessonItemLayout(context, 123);
-        lessonItemLayout.setFocusable(true);
-        llSingleLessonTime.addView(lessonItemLayout);
+//        lessonItemLayout = new LessonItemLayout(context, 123);
+//        lessonItemLayout.setFocusable(true);
+//        llSingleLessonTime.addView(lessonItemLayout);
 
         TextView tvLessonNum = (TextView) llMain.findViewById(R.id.tvLessonNum);
         TextView tvLessonTime = (TextView) llMain.findViewById(R.id.tvLessonTime);
