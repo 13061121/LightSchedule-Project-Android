@@ -3,19 +3,18 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mainLl"
-    android:gravity="center_vertical">
+    android:layout_gravity="center_vertical|center_horizontal">
 
     <LinearLayout
         android:layout_width="@dimen/list_head_left_item_length"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical|center_horizontal|center"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/margin_top_bottom"
             android:text="一"
             android:textColor="#000000"
             android:textSize="@dimen/abc_text_size_headline_material"
@@ -24,9 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:text="8:00\n9:45"
-            android:layout_marginBottom="@dimen/margin_top_bottom"
             android:id="@+id/tvLessonTime"/>
 
     </LinearLayout>
@@ -38,7 +35,8 @@
         android:layout_marginRight="@dimen/margin_left_right"
         android:layout_marginBottom="@dimen/margin_top_bottom"
         android:orientation="vertical"
-        android:id="@+id/llSingleLessonTime">
+        android:id="@+id/llSingleLessonTime"
+        android:gravity="center_vertical">
 
     </LinearLayout>
 

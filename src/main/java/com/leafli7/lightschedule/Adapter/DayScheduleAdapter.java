@@ -60,6 +60,11 @@ public class DayScheduleAdapter extends BaseAdapter {
         LessonItemLayout lessonItemLayout = new LessonItemLayout(context, 123);
         lessonItemLayout.setFocusable(true);
         llSingleLessonTime.addView(lessonItemLayout);
+
+        lessonItemLayout = new LessonItemLayout(context, 123);
+        lessonItemLayout.setFocusable(true);
+        llSingleLessonTime.addView(lessonItemLayout);
+
         TextView tvLessonNum = (TextView) llMain.findViewById(R.id.tvLessonNum);
         TextView tvLessonTime = (TextView) llMain.findViewById(R.id.tvLessonTime);
 
