@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lightschedule.R;
+import com.leafli7.lightschedule.Utils.Constant;
 import com.leafli7.lightschedule.fragment.DayScheduleFragment;
 
 import java.util.Calendar;
@@ -49,6 +50,7 @@ public class MainActivity extends ActionBarActivity {
 
         TAG = getClass().getSimpleName();
         setContentView(R.layout.activity_main);
+        Constant.initial();
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
@@ -70,14 +72,7 @@ public class MainActivity extends ActionBarActivity {
         mSlidingTabLayout.setDistributeEvenly(true);
         MainTabs mainTabs = new MainTabs();
         mViewPager.setAdapter(mainTabs);
-        //TODO
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        int curDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-        Log.e(TAG, "DAY_OF_WEEK : " + String.valueOf(cal.get(Calendar.DAY_OF_WEEK)));
-        curDayOfWeek = curDayOfWeek-1 == 0 ? 6 : curDayOfWeek-1;
-        Log.e(TAG, "DAY_OF_WEEK : " + String.valueOf(curDayOfWeek));
-        mViewPager.setCurrentItem(curDayOfWeek-1);   //leafli7 设置初始week选择
+        mViewPager.setCurrentItem(Constant.CURRENT_DAY_OF_WEEK);   //leafli7 设置初始week选择
         mSlidingTabLayout.setViewPager(mViewPager);
 
         // Tab events

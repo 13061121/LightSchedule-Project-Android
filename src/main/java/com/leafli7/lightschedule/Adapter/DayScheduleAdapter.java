@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lightschedule.R;
 import com.leafli7.lightschedule.Entity.SingleLessonTime;
@@ -22,9 +23,11 @@ import java.util.ArrayList;
 public class DayScheduleAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<SingleLessonTime> singleLessonTimes = new ArrayList<>();
+    private int curAdapterDayOfWeek;
 
-    public DayScheduleAdapter(Context context){
+    public DayScheduleAdapter(Context context, int curAdapterDayOfWeek){
         this.context = context;
+        this.curAdapterDayOfWeek = curAdapterDayOfWeek;
         for (int i = 0; i < Constant.LESSEN_TIME_ACCOUNT; i++) {
             singleLessonTimes.add(new SingleLessonTime());
         }
@@ -48,18 +51,32 @@ public class DayScheduleAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        String[] lessonNum = {"一", "二", "三", "四", "五", "六"};
-        String[] lessonTime = {"8:00\n9:45", "10:00\n11:45", "14:00\n15:45", "16:00\n17:45", "18:00\n19:45", "20:00\n21:45"};
+        String[] lessonNum = Constant.LESSON_NUM;
+        String[] lessonTime = Constant.LESSON_TIME;
 
-        LinearLayout ll = new LinearLayout(context);
-        ll = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.day_schedule_list_item, null);
+        LinearLayout llMain = new LinearLayout(context);
+        llMain = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.day_schedule_list_item, null);
 
-        TextView tvLessonNum = (TextView) ll.findViewById(R.id.tvLessonNum);
-        TextView tvLessonTime = (TextView) ll.findViewById(R.id.tvLessonTime);
+        LinearLayout llSingleLessonTime = (LinearLayout) llMain.findViewById(R.id.llSingleLessonTime);
+        TextView tvLessonNum = (TextView) llMain.findViewById(R.id.tvLessonNum);
+        TextView tvLessonTime = (TextView) llMain.findViewById(R.id.tvLessonTime);
+
+        //leafli7 test addview
+        TextView tvTest = new TextView(context);
+        tvTest.setText("TEST TEST TEST");
+        tvTest.setFocusable(true);
+        tvTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "@!$@#$@#", Toast.LENGTH_SHORT).show();
+            }
+        });
+        llSingleLessonTime.addView(tvTest);
+
 
         tvLessonNum.setText(lessonNum[position]);
         tvLessonTime.setText(lessonTime[position]);
 
-        return ll;
+        return llMain;
     }
 }

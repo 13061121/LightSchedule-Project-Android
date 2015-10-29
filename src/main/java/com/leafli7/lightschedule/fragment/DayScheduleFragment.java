@@ -1,20 +1,17 @@
 package com.leafli7.lightschedule.fragment;
 
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.lightschedule.R;
 import com.leafli7.lightschedule.Adapter.DayScheduleAdapter;
-
-import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,12 +19,13 @@ import java.util.HashMap;
 public class DayScheduleFragment extends Fragment {
 
     String TAG = getClass().getSimpleName();
+
+    private int curFragmentDayOfWeek;
     private ListView lvDayScheduleListView;
 
-    public DayScheduleFragment() {
-        // Required empty public constructor
+    public void setCurFragmentDayOfWeek(int curFragmentDayOfWeek){
+        this.curFragmentDayOfWeek = curFragmentDayOfWeek;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +51,7 @@ public class DayScheduleFragment extends Fragment {
 
 
         lvDayScheduleListView = (ListView) view.findViewById(R.id.lvDayScheduleListView);
-        lvDayScheduleListView.setAdapter(new DayScheduleAdapter(getActivity()));
+        lvDayScheduleListView.setAdapter(new DayScheduleAdapter(getActivity(), curFragmentDayOfWeek));
 
         Log.e(TAG, TAG + " onStart");
     }

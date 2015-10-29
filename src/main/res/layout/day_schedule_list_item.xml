@@ -37,7 +37,8 @@
         android:layout_marginTop="@dimen/margin_top_bottom"
         android:layout_marginRight="@dimen/margin_left_right"
         android:layout_marginBottom="@dimen/margin_top_bottom"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/llSingleLessonTime">
 
         <TextView
             android:layout_width="match_parent"

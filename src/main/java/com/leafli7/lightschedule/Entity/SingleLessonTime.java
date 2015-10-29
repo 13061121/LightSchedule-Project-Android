@@ -5,10 +5,8 @@ import java.util.ArrayList;
 /**
  * Created by xxcub on 2015/10/29.
  */
-public class SingleLessonTime {
-    public ArrayList<Lesson> lessons = new ArrayList<>();
+public class SingleLessonTime extends ArrayList<Lesson>{
 
-    void SingleLessonTime(){
-        lessons.add(new Lesson());
-    }
+    //add
+
 }
