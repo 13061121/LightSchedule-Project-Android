@@ -22,7 +22,7 @@ public abstract class Constant {
     public static int LESSEN_TIME_ACCOUNT = 6;
     public static String[] LESSON_NUM = {"一", "二", "三", "四", "五", "六"};
     public static String[] LESSON_TIME = {"8:00\n9:45", "10:00\n11:45", "14:00\n15:45", "16:00\n17:45", "18:00\n19:45", "20:00\n21:45"};
-
+    public static final String DatabaseName = "own_schedule.db";
 
     public static WeekSchedule weekSchedule;
     public static boolean isShowAllLesson;  //是否显示所有课程(非本周课程)

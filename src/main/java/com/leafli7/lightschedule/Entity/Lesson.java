@@ -60,4 +60,48 @@ public class Lesson {
         this.isSingleWeekLesson = isSingleWeekLesson;
         this.isOddWeekLesson = isOddWeekLesson;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getStartWeek() {
+        return startWeek;
+    }
+
+    public int getEndWeek() {
+        return endWeek;
+    }
+
+    public int getLessonTimeNum() {
+        return lessonTimeNum;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public String getClassroom() {
+        return classroom;
+    }
+
+    public boolean isTinyLesson() {
+        return isTinyLesson;
+    }
+
+    public boolean isFirstHalf() {
+        return isFirstHalf;
+    }
+
+    public boolean isSingleWeekLesson() {
+        return isSingleWeekLesson;
+    }
+
+    public boolean isOddWeekLesson() {
+        return isOddWeekLesson;
+    }
 }

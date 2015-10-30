@@ -40,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
     SlidingTabLayout mSlidingTabLayout;
     ViewPager mViewPager;
     ViewPager.OnPageChangeListener mSlidingTabLayoutOnPageChangeListener;
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +48,19 @@ public class MainActivity extends ActionBarActivity {
 
         TAG = getClass().getSimpleName();
         setContentView(R.layout.activity_main);
-        Constant.initial();
 
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-        setSupportActionBar(mToolbar);
+        Constant.initial();
+        initialFindView();
+        initialTabAndToolbar();
+        initialNav();
+    }
+
+    private void initialDatabase(){
+
+    }
+
+    private void initialFindView() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setStatusBarBackgroundColor(getResources().getColor(R.color.colorMainDark));
@@ -60,7 +70,10 @@ public class MainActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+    }
 
+    private void initialTabAndToolbar() {
+        setSupportActionBar(mToolbar);
         // use own style rules for tab layout
         mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
 
@@ -93,8 +106,9 @@ public class MainActivity extends ActionBarActivity {
         if (mSlidingTabLayout != null) {
             mSlidingTabLayout.setOnPageChangeListener(mSlidingTabLayoutOnPageChangeListener);
         }
+    }
 
-
+    private void initialNav() {
         // Click events for Navigation Drawer
         LinearLayout navButton = (LinearLayout) findViewById(R.id.txtNavButton);
         navButton.setOnClickListener(new View.OnClickListener() {
