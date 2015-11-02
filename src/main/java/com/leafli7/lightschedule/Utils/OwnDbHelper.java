@@ -13,7 +13,7 @@ import com.leafli7.lightschedule.Entity.Lesson;
  * Created by xxcub on 2015/10/30.
  */
 public class OwnDbHelper extends SQLiteOpenHelper {
-    String TAG = getClass().getSimpleName();
+    String TAG = "leafli7 debug : " + getClass().getSimpleName();
     private static String dbScheduleTableName = Constant.DbScheduleTableName;
     private static int version  = 1;
     private Context context;
@@ -21,8 +21,7 @@ public class OwnDbHelper extends SQLiteOpenHelper {
     public OwnDbHelper(Context context) {
         super(context, dbScheduleTableName, null, version);
         this.context = context;
-        Log.e(TAG, "sql constructer!");
-        Log.e(TAG, "leafli7 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        Log.e(TAG, "sql construct");
 
 //        try {
 //            String del = "drop table " + dbScheduleTableName + ";";
@@ -31,23 +30,23 @@ public class OwnDbHelper extends SQLiteOpenHelper {
 //            Log.e(TAG, "del exception");
 //        }
 
-        String sql = "create table if not exists " + dbScheduleTableName + "(" +
-                "id integer primary key AUTOINCREMENT," +
-                "name text not null," +
-                "start_week tinyint not null," +
-                "end_week tinyint not null," +
-                "lesson_time_num tinyint not null," +
-                "teacher_name nchar(55)," +
-                "classroom text not null," +
-                "is_tiny_lesson int not null," +
-                "is_first_half int," +
-                "is_single_week_lesson int not null," +
-                "is_odd_week_lesson int," +
-                Constant.tableColumnDayOfWeek + " int" +
-                ");";
-        getWritableDatabase().execSQL(sql);
+//        String sql = "create table if not exists " + dbScheduleTableName + "(" +
+//                "id integer primary key AUTOINCREMENT," +
+//                "name text not null," +
+//                "start_week tinyint not null," +
+//                "end_week tinyint not null," +
+//                "lesson_time_num tinyint not null," +
+//                "teacher_name nchar(55)," +
+//                "classroom text not null," +
+//                "is_tiny_lesson int not null," +
+//                "is_first_half int," +
+//                "is_single_week_lesson int not null," +
+//                "is_odd_week_lesson int," +
+//                Constant.tableColumnDayOfWeek + " int" +
+//                ");";
+//        getWritableDatabase().execSQL(sql);
 
-        showAllData();
+//        showAllData();
     }
 
     //show all date in db

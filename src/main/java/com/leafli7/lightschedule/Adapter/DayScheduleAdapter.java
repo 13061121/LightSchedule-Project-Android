@@ -1,16 +1,18 @@
 package com.leafli7.lightschedule.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lightschedule.R;
+import com.leafli7.lightschedule.Activity.AddLessonActivity;
 import com.leafli7.lightschedule.Entity.Lesson;
 import com.leafli7.lightschedule.Entity.SingleLessonTime;
 import com.leafli7.lightschedule.Utils.Constant;
@@ -22,6 +24,8 @@ import java.util.ArrayList;
  * Created by xxcub on 2015/10/29.
  */
 public class DayScheduleAdapter extends BaseAdapter {
+    private String TAG = "leafli7 debug : " + getClass().getSimpleName();
+
     private Context context;
     private ArrayList<SingleLessonTime> singleLessonTimes = new ArrayList<>();
     private int curAdapterDayOfWeek;
@@ -50,12 +54,29 @@ public class DayScheduleAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         String[] lessonNum = Constant.LESSON_NUM;
         String[] lessonTime = Constant.LESSON_TIME;
 
-        LinearLayout llMain = new LinearLayout(context);
+        LinearLayout llMain, llLessonTimeNum;
         llMain = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.day_schedule_list_item, null);
+        llLessonTimeNum = (LinearLayout) llMain.findViewById(R.id.llLessonTimeNum);
+        llLessonTimeNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "clicked LessonTimeNum " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        llLessonTimeNum.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent i = new Intent(context, AddLessonActivity.class);
+                context.startActivity(i);
+                Log.e(TAG, "leafli : wait for add activity!");
+                Toast.makeText(context, "long clicked LessonTimeNum " + position, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
 
         LinearLayout llSingleLessonTime = (LinearLayout) llMain.findViewById(R.id.llSingleLessonTime);
         ArrayList<Lesson> curLessones = singleLessonTimes.get(position);
@@ -77,7 +98,14 @@ public class DayScheduleAdapter extends BaseAdapter {
             lessonItemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "clicked " + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "clicked lesson : " + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            lessonItemLayout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Toast.makeText(context, "long clicked lesson : " + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();
+                    return false;
                 }
             });
             llSingleLessonTime.addView(lessonItemLayout);

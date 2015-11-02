@@ -17,7 +17,7 @@ import com.leafli7.lightschedule.Adapter.DayScheduleAdapter;
  */
 public class DayScheduleFragment extends Fragment {
 
-    String TAG = getClass().getSimpleName();
+    String TAG = "leafli7 debug : " + getClass().getSimpleName();
 
     private int curFragmentDayOfWeek;
     private ListView lvDayScheduleListView;

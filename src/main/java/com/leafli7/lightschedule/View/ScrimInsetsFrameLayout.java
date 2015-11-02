@@ -1,4 +1,4 @@
-package com.leafli7.lightschedule;
+package com.leafli7.lightschedule.View;
 
 import android.content.Context;
 import android.content.res.TypedArray;

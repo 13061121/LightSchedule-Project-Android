@@ -1,0 +1,16 @@
+<android.support.v4.widget.DrawerLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.leafli7.lightschedule.Activity.AddLessonActivity"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height">
+
+        <include layout="@layout/toolbar_actionbar" />
+    </LinearLayout>
+
+
+</android.support.v4.widget.DrawerLayout>

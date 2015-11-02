@@ -37,7 +37,7 @@ import SlidingTabs.SlidingTabLayout;
  */
 public class MainActivity extends ActionBarActivity {
 
-    String TAG;
+    String TAG = "leafli7 debug : " + getClass().getSimpleName();
 
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout mDrawerLayout;
