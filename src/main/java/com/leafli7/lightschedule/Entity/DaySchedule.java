@@ -15,8 +15,8 @@ public class DaySchedule extends ArrayList<SingleLessonTime> {
         }
     }
 
-    public void add(Lesson lesson, int lessonTimeNum){
-        this.get(lessonTimeNum).add(lesson);
+    public void add(Lesson lesson){
+        this.get(lesson.getLessonTimeNum()).add(lesson);
     }
 
 }

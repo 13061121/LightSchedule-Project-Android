@@ -16,6 +16,12 @@ public class Lesson {
     private boolean isFirstHalf;    //是否为前半小节课 false则为后半节
     private boolean isSingleWeekLesson; //是否为单双周周课程
     private boolean isOddWeekLesson; //是否为奇数周课程
+    private int dayOfWeek;
+
+    public Lesson(){
+        isTinyLesson = false;
+        isSingleWeekLesson = false;
+    }
 
     public Lesson(String classroom, int id, String name, int startWeek, int endWeek, int lessonTimeNum, String teacherName) {
         this.classroom = classroom;
@@ -103,5 +109,57 @@ public class Lesson {
 
     public boolean isOddWeekLesson() {
         return isOddWeekLesson;
+    }
+
+    public void setIsOddWeekLesson(boolean isOddWeekLesson) {
+        this.isOddWeekLesson = isOddWeekLesson;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStartWeek(int startWeek) {
+        this.startWeek = startWeek;
+    }
+
+    public void setEndWeek(int endWeek) {
+        this.endWeek = endWeek;
+    }
+
+    public void setLessonTimeNum(int lessonTimeNum) {
+        this.lessonTimeNum = lessonTimeNum;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public void setClassroom(String classroom) {
+        this.classroom = classroom;
+    }
+
+    public void setIsTinyLesson(boolean isTinyLesson) {
+        this.isTinyLesson = isTinyLesson;
+    }
+
+    public void setIsFirstHalf(boolean isFirstHalf) {
+        this.isFirstHalf = isFirstHalf;
+    }
+
+    public void setIsSingleWeekLesson(boolean isSingleWeekLesson) {
+        this.isSingleWeekLesson = isSingleWeekLesson;
+    }
+
+    public int getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(int dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 }

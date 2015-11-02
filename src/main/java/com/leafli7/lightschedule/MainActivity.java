@@ -2,6 +2,7 @@ package com.leafli7.lightschedule;
 
 
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -21,8 +22,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lightschedule.R;
+import com.leafli7.lightschedule.Entity.Lesson;
+import com.leafli7.lightschedule.Entity.WeekSchedule;
 import com.leafli7.lightschedule.Utils.Constant;
 import com.leafli7.lightschedule.Fragment.DayScheduleFragment;
+import com.leafli7.lightschedule.Utils.OwnDbHelper;
 
 import java.util.HashMap;
 
@@ -41,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
     ViewPager mViewPager;
     ViewPager.OnPageChangeListener mSlidingTabLayoutOnPageChangeListener;
     Toolbar mToolbar;
+    OwnDbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +54,28 @@ public class MainActivity extends ActionBarActivity {
         TAG = getClass().getSimpleName();
         setContentView(R.layout.activity_main);
 
-        Constant.initial();
+        Constant.initial(this);
+//        initialDatabase();
         initialFindView();
         initialTabAndToolbar();
         initialNav();
     }
 
     private void initialDatabase(){
+        dbHelper = new OwnDbHelper(this);
+        WeekSchedule weekSchedule = Constant.weekSchedule;
 
+//        dbHelper.insertLesson(new Lesson("M201", 0, "oop", 1, 18, 3, "wu ji"));
+//        dbHelper.insertLesson(new Lesson("(一)301", 0, "编译", 1, 18, 2, "shi xiao hua"));
+//        dbHelper.insertLesson(new Lesson("M111", 0, "软工", 3, 17, 4, "?"));
+//        dbHelper.insertLesson(new Lesson("F123", 0, "c***", 1, 16, 4, "lalala"));
+        Cursor cursor = dbHelper.querySchedule();
+        while (cursor.moveToNext()){
+            for (String name:cursor.getColumnNames()){
+                Log.e(TAG, name);
+            }
+        }
+        cursor.close();
     }
 
     private void initialFindView() {

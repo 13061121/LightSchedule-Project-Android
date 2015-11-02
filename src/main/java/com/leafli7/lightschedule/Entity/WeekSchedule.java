@@ -15,8 +15,8 @@ public class WeekSchedule extends ArrayList<DaySchedule> {
         }
     }
 
-    public void add(Lesson lesson, int dayOfWeek, int lessonTimeNum) {
-        this.get(dayOfWeek).add(lesson, lessonTimeNum);
+    public void add(Lesson lesson) {
+        this.get(lesson.getDayOfWeek()).add(lesson);
     }
 
 }
