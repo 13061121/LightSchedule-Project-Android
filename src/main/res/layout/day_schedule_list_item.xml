@@ -10,6 +10,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_vertical|center_horizontal|center"
+        android:layout_marginTop="@dimen/margin_top_bottom"
+        android:layout_marginBottom="@dimen/margin_top_bottom"
         >
 
         <TextView

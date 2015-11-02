@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 import com.leafli7.lightschedule.Entity.Lesson;
 
-import java.util.concurrent.ExecutionException;
-
 /**
  * Created by xxcub on 2015/10/30.
  */
@@ -44,18 +42,20 @@ public class OwnDbHelper extends SQLiteOpenHelper {
                 "is_tiny_lesson int not null," +
                 "is_first_half int," +
                 "is_single_week_lesson int not null," +
-                "is_odd_week_lesson int" +
+                "is_odd_week_lesson int," +
+                Constant.tableColumnDayOfWeek + " int" +
                 ");";
         getWritableDatabase().execSQL(sql);
 
-        showAllDate();
+        showAllData();
     }
 
     //show all date in db
     //for debug
-    void showAllDate(){
+    void showAllData(){
         SQLiteDatabase db = getWritableDatabase();
         String sql = "select * from " + dbScheduleTableName + ";";
+        Log.e(TAG, "Show all data from database");
         Cursor cursor = db.rawQuery(sql, null);
         while (cursor.moveToNext()){
             Log.e(TAG, "------");
@@ -93,7 +93,8 @@ public class OwnDbHelper extends SQLiteOpenHelper {
                 "is_tiny_lesson int not null," +
                 "is_first_half int," +
                 "is_single_week_lesson int not null," +
-                "is_odd_week_lesson int" +
+                "is_odd_week_lesson int," +
+                Constant.tableColumnDayOfWeek + " int" +
                 ");";
         db.execSQL(sql);
         Log.e(TAG, "sqlite oncreate");
@@ -108,31 +109,31 @@ public class OwnDbHelper extends SQLiteOpenHelper {
             String sql = "";
             if (!lesson.isSingleWeekLesson() && !lesson.isTinyLesson()) {
                 sql = "insert into " + dbScheduleTableName + "" +
-                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_single_week_lesson) " +
+                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_single_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
                         "values " +
                         "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() +  ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + isTiny + "," + isSingle + ")";
+                        ",'" + lesson.getClassroom() + "'," + isTiny + "," + isSingle + "," + lesson.getDayOfWeek() + ")";
                 getWritableDatabase().execSQL(sql);
             }else if (lesson.isSingleWeekLesson() && !lesson.isTinyLesson()){
                 sql = "insert into " + dbScheduleTableName + " {" +
-                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_single_week_lesson,is_odd_week_lesson) " +
+                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_single_week_lesson,is_odd_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
                         "values " +
                         "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() + ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + lesson.isTinyLesson() + "," + lesson.isSingleWeekLesson() + "," + lesson.isOddWeekLesson() + ")";
+                        ",'" + lesson.getClassroom() + "'," + lesson.isTinyLesson() + "," + lesson.isSingleWeekLesson() + "," + lesson.isOddWeekLesson() + "," + lesson.getDayOfWeek() + ")";
                 getWritableDatabase().execSQL(sql);
             }else if (!lesson.isSingleWeekLesson() && lesson.isTinyLesson()){
                 sql = "insert into " + dbScheduleTableName + " {" +
-                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_first_half,is_single_week_lesson) " +
+                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_first_half,is_single_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
                         "values " +
                         "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() + ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + lesson.isTinyLesson() + "," + lesson.isFirstHalf() + ","+ lesson.isSingleWeekLesson() + ")";
+                        ",'" + lesson.getClassroom() + "'," + lesson.isTinyLesson() + "," + lesson.isFirstHalf() + ","+ lesson.isSingleWeekLesson() + "," + lesson.getDayOfWeek() + ")";
                 getWritableDatabase().execSQL(sql);
             }else if (lesson.isSingleWeekLesson() && lesson.isTinyLesson()){
                 sql = "insert into " + dbScheduleTableName + " {" +
-                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_first_half,is_single_week_lesson,is_odd_week-lesson) " +
+                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_first_half,is_single_week_lesson,is_odd_week-lesson," + Constant.tableColumnDayOfWeek + ") " +
                         "values " +
                         "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() + ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + lesson.isTinyLesson() + "," + lesson.isFirstHalf() + ","+ lesson.isSingleWeekLesson() + "," + lesson.isOddWeekLesson() + ")";
+                        ",'" + lesson.getClassroom() + "'," + lesson.isTinyLesson() + "," + lesson.isFirstHalf() + ","+ lesson.isSingleWeekLesson() + "," + lesson.isOddWeekLesson() + "," + lesson.getDayOfWeek() + ")";
                 getWritableDatabase().execSQL(sql);
             }else{
                 Log.e(TAG, "no sql insert!");

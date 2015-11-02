@@ -23,6 +23,7 @@ public class LessonItemLayout extends RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.lesson_item_layout, this, true);
     }
 
-
-
+    public int getLessonId() {
+        return lessonId;
+    }
 }

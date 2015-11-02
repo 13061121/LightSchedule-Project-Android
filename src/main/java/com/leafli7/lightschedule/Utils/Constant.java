@@ -51,6 +51,8 @@ public abstract class Constant {
     }
 
     private static void initialWeekSchedule() {
+        weekSchedule = new WeekSchedule();
+
         OwnDbHelper ownDbHelper = new OwnDbHelper(context);
         Cursor cursor = ownDbHelper.querySchedule();
         while (cursor.moveToNext()) {
@@ -84,6 +86,7 @@ public abstract class Constant {
                 }
             }
 
+            weekSchedule.add(lesson);
         }
     }
 

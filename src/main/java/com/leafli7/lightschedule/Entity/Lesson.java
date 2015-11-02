@@ -1,5 +1,7 @@
 package com.leafli7.lightschedule.Entity;
 
+import java.util.Date;
+
 /**
  * @author leafli7
  * Created by xxcub on 2015/10/29.
@@ -23,7 +25,7 @@ public class Lesson {
         isSingleWeekLesson = false;
     }
 
-    public Lesson(String classroom, int id, String name, int startWeek, int endWeek, int lessonTimeNum, String teacherName) {
+    public Lesson(String classroom, int id, String name, int startWeek, int endWeek, int lessonTimeNum, String teacherName, int dayOfWeek) {
         this.classroom = classroom;
         this.id = id;
         this.name = name;
@@ -35,6 +37,7 @@ public class Lesson {
         this.isFirstHalf = false;
         this.isSingleWeekLesson = false;
         this.isOddWeekLesson = false;
+        this.dayOfWeek = dayOfWeek;
     }
 
     public Lesson(String classroom, int id, String name, int startWeek, int endWeek, int lessonTimeNum, String teacherName,

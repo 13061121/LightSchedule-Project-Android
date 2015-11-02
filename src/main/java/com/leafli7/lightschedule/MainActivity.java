@@ -54,8 +54,8 @@ public class MainActivity extends ActionBarActivity {
         TAG = getClass().getSimpleName();
         setContentView(R.layout.activity_main);
 
+        initialDatabase();
         Constant.initial(this);
-//        initialDatabase();
         initialFindView();
         initialTabAndToolbar();
         initialNav();
@@ -63,19 +63,18 @@ public class MainActivity extends ActionBarActivity {
 
     private void initialDatabase(){
         dbHelper = new OwnDbHelper(this);
-        WeekSchedule weekSchedule = Constant.weekSchedule;
-
-//        dbHelper.insertLesson(new Lesson("M201", 0, "oop", 1, 18, 3, "wu ji"));
-//        dbHelper.insertLesson(new Lesson("(一)301", 0, "编译", 1, 18, 2, "shi xiao hua"));
-//        dbHelper.insertLesson(new Lesson("M111", 0, "软工", 3, 17, 4, "?"));
-//        dbHelper.insertLesson(new Lesson("F123", 0, "c***", 1, 16, 4, "lalala"));
-        Cursor cursor = dbHelper.querySchedule();
-        while (cursor.moveToNext()){
-            for (String name:cursor.getColumnNames()){
-                Log.e(TAG, name);
-            }
-        }
-        cursor.close();
+//        WeekSchedule weekSchedule = Constant.weekSchedule;
+//        dbHelper.insertLesson(new Lesson("M201", 0, "oop", 1, 18, 1, "wu ji", 2));
+//        dbHelper.insertLesson(new Lesson("(一)301", 0, "编译", 1, 18, 2, "shi xiao hua", 5));
+//        dbHelper.insertLesson(new Lesson("M111", 0, "软工", 3, 17, 4, "?", 0));
+//        dbHelper.insertLesson(new Lesson("F123", 0, "c***", 1, 16, 4, "lalala", 3));
+//        Cursor cursor = dbHelper.querySchedule();
+//        while (cursor.moveToNext()){
+//            for (String name:cursor.getColumnNames()){
+//                Log.e(TAG, name);
+//            }
+//        }
+//        cursor.close();
     }
 
     private void initialFindView() {
@@ -198,10 +197,13 @@ public class MainActivity extends ActionBarActivity {
         SparseArray<View> views = new SparseArray<View>();
 
         public MainTabs(){
+            int i = 0;
             for (String day : week){
                 DayScheduleFragment curFragment = new DayScheduleFragment();
+                curFragment.setCurFragmentDayOfWeek(i);
                 fragmentHashMap.put(day, curFragment);
                 getSupportFragmentManager().beginTransaction().add(curFragment, day).commit();
+                i++;
             }
         }
 

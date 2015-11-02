@@ -101,7 +101,7 @@
                         android:textColor="@color/colorText"
                         android:minHeight="?android:attr/listPreferredItemHeightSmall"
                         android:background="@android:color/transparent"
-                        android:text="Home"
+                        android:text="Main Schedule"
                         android:textStyle="bold"
                         android:singleLine="false"
                         android:focusableInTouchMode="true"
