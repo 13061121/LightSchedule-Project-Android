@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * Created by xxcub on 2015/10/29.
  */
 public class DayScheduleAdapter extends BaseAdapter {
-    private String TAG = "leafli7 debug : " + getClass().getSimpleName();
+    private String TAG = Constant.TAG + getClass().getSimpleName();
 
     private Context context;
     private ArrayList<SingleLessonTime> singleLessonTimes = new ArrayList<>();

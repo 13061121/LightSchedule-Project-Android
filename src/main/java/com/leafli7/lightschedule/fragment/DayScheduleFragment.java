@@ -11,13 +11,14 @@ import android.widget.ListView;
 
 import com.example.lightschedule.R;
 import com.leafli7.lightschedule.Adapter.DayScheduleAdapter;
+import com.leafli7.lightschedule.Utils.Constant;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class DayScheduleFragment extends Fragment {
 
-    String TAG = "leafli7 debug : " + getClass().getSimpleName();
+    String TAG = Constant.TAG + getClass().getSimpleName();
 
     private int curFragmentDayOfWeek;
     private ListView lvDayScheduleListView;

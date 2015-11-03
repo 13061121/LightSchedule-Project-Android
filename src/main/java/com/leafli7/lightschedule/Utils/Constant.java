@@ -17,6 +17,8 @@ public abstract class Constant {
      * 原则：程序和数据库中计数全部从０开始
      * 即，程序中的第０周代表数据库（实际上）的第一周．
      */
+    public static final String TAG = "leafli7 debug : ";
+
     public static Context context;
     public static int DAY_ACCOUNT_OF_ONE_WEEK = 7;
     public static int CURRENT_WEEK = 0;

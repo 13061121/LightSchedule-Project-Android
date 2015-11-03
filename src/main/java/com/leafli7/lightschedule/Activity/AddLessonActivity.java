@@ -13,7 +13,7 @@ import com.example.lightschedule.R;
 import com.leafli7.lightschedule.Utils.Constant;
 
 public class AddLessonActivity extends AppCompatActivity {
-
+    private String TAG = Constant.TAG + getClass().getSimpleName();
     private Toolbar mToolbar;
 
     @Override
@@ -42,6 +42,9 @@ public class AddLessonActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }else if (id == android.R.id.home){
+            Log.e(TAG, "Home clicked");
+            this.finish();
         }
 
         return super.onOptionsItemSelected(item);

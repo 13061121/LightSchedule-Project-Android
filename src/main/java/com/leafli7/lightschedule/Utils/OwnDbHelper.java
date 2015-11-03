@@ -13,7 +13,7 @@ import com.leafli7.lightschedule.Entity.Lesson;
  * Created by xxcub on 2015/10/30.
  */
 public class OwnDbHelper extends SQLiteOpenHelper {
-    String TAG = "leafli7 debug : " + getClass().getSimpleName();
+    String TAG = Constant.TAG + getClass().getSimpleName();
     private static String dbScheduleTableName = Constant.DbScheduleTableName;
     private static int version  = 1;
     private Context context;

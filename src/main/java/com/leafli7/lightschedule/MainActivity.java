@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
      */
 
 
-    String TAG = "leafli7 debug : " + getClass().getSimpleName();
+    String TAG = Constant.TAG + getClass().getSimpleName();
 
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout mDrawerLayout;
