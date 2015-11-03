@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialTabAndToolbar() {
+        mToolbar.setTitle(getString(R.string.title_activity_main));
         setSupportActionBar(mToolbar);
         // use own style rules for tab layout
         mSlidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);

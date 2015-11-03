@@ -21,6 +21,7 @@ public class AddLessonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lesson);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        mToolbar.setTitle(getString(R.string.title_activity_add_lesson));
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

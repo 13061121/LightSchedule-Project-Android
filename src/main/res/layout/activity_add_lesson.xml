@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_left_right"
             android:layout_marginRight="@dimen/margin_left_right"
             android:layout_marginTop="@dimen/margin_top_bottom"
@@ -28,12 +28,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lesson Title" />
+                android:text="@string/lesson_name" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Lesson Title" />
+                android:hint="@string/lesson_name"
+                android:id="@+id/etLessonTitle"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -43,12 +44,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Classroom" />
+                android:text="@string/classroom"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Classroom" />
+                android:hint="@string/classroom"
+                android:id="@+id/etClassroom"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -58,12 +60,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Teacher Name" />
+                android:text="@string/teacher_name" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Teacher Name" />
+                android:hint="@string/teacher_name"
+                android:id="@+id/etTeacherName"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -84,11 +87,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Section of lesson" />
+                        android:text="@string/section_of_lesson" />
 
                     <Spinner
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"></Spinner>
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spLessonTimeNum"></Spinner>
                 </LinearLayout>
 
                 <LinearLayout
@@ -100,11 +104,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Day of Week" />
+                        android:text="@string/day_of_week" />
 
                     <Spinner
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"></Spinner>
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spDayOfWeek"></Spinner>
                 </LinearLayout>
             </LinearLayout>
 
@@ -126,11 +131,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="From" />
+                        android:text="@string/from" />
 
                     <Spinner
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"></Spinner>
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spStartWeek"></Spinner>
                 </LinearLayout>
 
                 <LinearLayout
@@ -142,11 +148,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="To" />
+                        android:text="@string/to" />
 
                     <Spinner
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"></Spinner>
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spEndWeek"></Spinner>
                 </LinearLayout>
             </LinearLayout>
 
@@ -162,28 +169,33 @@
                 <CheckBox
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="is tiny lesson"
-                    android:layout_weight="1"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:text="@string/is_tiny_lesson"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:visibility="invisible">
+                    android:id="@+id/cbIsTinyLesson"/>
 
-                    <CheckBox
+                    <RadioGroup
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal"
                         android:layout_weight="1"
-                        android:text="First"/>
-                    <CheckBox
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Second"/>
+                        android:id="@+id/rgIsTinyLesson"
+                        android:visibility="invisible">
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/first"
+                            android:layout_weight="1"
+                            android:id="@+id/rbFirst"/>
 
-                </LinearLayout>
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/second"
+                            android:layout_weight="1"
+                            android:id="@+id/rbSecond"/>
+
+                    </RadioGroup>
+
 
             </LinearLayout>
 
@@ -191,6 +203,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space_width" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -199,31 +212,34 @@
                 <CheckBox
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="is alternate weeks"
-                    android:layout_weight="1"/>
+                    android:text="@string/is_alternate_weeks"
+                    android:layout_weight="1"
+                    android:id="@+id/cbIsSingleWeekLesson"/>
 
-                <LinearLayout
+                <RadioGroup
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:orientation="horizontal"
-                    android:visibility="invisible">
-
-                    <CheckBox
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:id="@+id/rgIsSingleWeekLesson">
+                    <RadioButton
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:text="@string/odd"
                         android:layout_weight="1"
-                        android:text="Odd"/>
-                    <CheckBox
+                        android:id="@+id/rbOdd"/>
+
+                    <RadioButton
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:text="@string/even"
                         android:layout_weight="1"
-                        android:text="Even"/>
+                        android:id="@+id/rbEven"/>
 
-                </LinearLayout>
+                </RadioGroup>
 
             </LinearLayout>
-
 
         </LinearLayout>
     </ScrollView>
