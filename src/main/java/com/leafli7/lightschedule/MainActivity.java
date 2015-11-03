@@ -2,13 +2,12 @@ package com.leafli7.lightschedule;
 
 
 import android.content.res.Resources;
-import android.database.Cursor;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.SparseArray;
@@ -22,10 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lightschedule.R;
-import com.leafli7.lightschedule.Entity.Lesson;
 import com.leafli7.lightschedule.Entity.WeekSchedule;
-import com.leafli7.lightschedule.Utils.Constant;
 import com.leafli7.lightschedule.Fragment.DayScheduleFragment;
+import com.leafli7.lightschedule.Utils.Constant;
 import com.leafli7.lightschedule.Utils.OwnDbHelper;
 
 import java.util.HashMap;
@@ -35,7 +33,12 @@ import SlidingTabs.SlidingTabLayout;
 /**
  * @author leafli7
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
+
+    /*
+    TODO : 添加课程时应该列出已有课程,若没有再开新activity添加.
+     */
+
 
     String TAG = "leafli7 debug : " + getClass().getSimpleName();
 
@@ -50,8 +53,8 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         TAG = getClass().getSimpleName();
+
         setContentView(R.layout.activity_main);
 
         initialDatabase();
@@ -63,11 +66,28 @@ public class MainActivity extends ActionBarActivity {
 
     private void initialDatabase(){
         dbHelper = new OwnDbHelper(this);
-//        WeekSchedule weekSchedule = Constant.weekSchedule;
-//        dbHelper.insertLesson(new Lesson("M201", 0, "oop", 1, 18, 1, "wu ji", 2));
-//        dbHelper.insertLesson(new Lesson("(一)301", 0, "编译", 1, 18, 2, "shi xiao hua", 5));
-//        dbHelper.insertLesson(new Lesson("M111", 0, "软工", 3, 17, 4, "?", 0));
-//        dbHelper.insertLesson(new Lesson("F123", 0, "c***", 1, 16, 4, "lalala", 3));
+
+//        try {
+//            String del = "drop table " + Constant.DbScheduleTableName + ";";
+//            dbHelper.getWritableDatabase().execSQL(del);
+//        }catch (Exception e){
+//            Log.e(TAG, "del exception");
+//        }
+        WeekSchedule weekSchedule = Constant.weekSchedule;
+//        dbHelper.insertLesson(new Lesson("主201", 0, "计算机工程中最优化方法", 0, 14, 0, "冷彪", Lesson.DAY_MONDAY));
+//        dbHelper.insertLesson(new Lesson("(一)301", 0, "编译技术", 0, 12, 1, "史晓华", Lesson.DAY_MONDAY));
+//        dbHelper.insertLesson(new Lesson("-", 0, "剑术", 0, 16, 2, "张洋", Lesson.DAY_MONDAY));
+//        dbHelper.insertLesson(new Lesson("主203", 0, "C2", 0, 12, 3, "尹宝林", Lesson.DAY_MONDAY));
+//        dbHelper.insertLesson(new Lesson("(一)301", 0, "数据库", 0, 12, 1, "刘瑞", Lesson.DAY_TUESDAY));
+//        dbHelper.insertLesson(new Lesson("主203", 0, "软件工程基础", 0, 16, 2, "姚淑珍", Lesson.DAY_TUESDAY));
+//        dbHelper.insertLesson(new Lesson("主203", 0, "Android", 0, 8, 3, "张炯", Lesson.DAY_TUESDAY));
+//        dbHelper.insertLesson(new Lesson("F201", 0, "网络系统运行管理及性能分析", 1, 9, 4, "栾钟治", Lesson.DAY_TUESDAY));
+//        dbHelper.insertLesson(new Lesson("(一)301", 0, "编译技术", 0, 12, 1, "史晓华", Lesson.DAY_WEDNESDAY));
+//        dbHelper.insertLesson(new Lesson("主203", 0, "RUBY", 0, 8, 2, "沃天宇", Lesson.DAY_WEDNESDAY));
+//        dbHelper.insertLesson(new Lesson("主203", 0, "大数据", 0, 12, 1, "吴文俊", Lesson.DAY_THURSDAY));
+//        dbHelper.insertLesson(new Lesson("(一)301", 0, "数据库", 0, 12, 2, "刘瑞", Lesson.DAY_THURSDAY));
+//        dbHelper.insertLesson(new Lesson("主349", 0, "数学建模", 0, 16, 0, "武三星", Lesson.DAY_FRIDAY));
+//        dbHelper.insertLesson(new Lesson("主203", 0, "移动计算导论", 0, 12, 3, "牛建伟,盛浩", Lesson.DAY_FRIDAY));
 //        Cursor cursor = dbHelper.querySchedule();
 //        while (cursor.moveToNext()){
 //            for (String name:cursor.getColumnNames()){

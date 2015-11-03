@@ -1,6 +1,8 @@
 package com.leafli7.lightschedule.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import com.leafli7.lightschedule.Activity.AddLessonActivity;
 import com.leafli7.lightschedule.Entity.Lesson;
 import com.leafli7.lightschedule.Entity.SingleLessonTime;
 import com.leafli7.lightschedule.Utils.Constant;
+import com.leafli7.lightschedule.Utils.OwnDbHelper;
 import com.leafli7.lightschedule.View.LessonItemLayout;
 
 import java.util.ArrayList;
@@ -67,6 +70,7 @@ public class DayScheduleAdapter extends BaseAdapter {
                 Toast.makeText(context, "clicked LessonTimeNum " + position, Toast.LENGTH_SHORT).show();
             }
         });
+        //TODO : 长按添加课程
         llLessonTimeNum.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -80,8 +84,8 @@ public class DayScheduleAdapter extends BaseAdapter {
 
         LinearLayout llSingleLessonTime = (LinearLayout) llMain.findViewById(R.id.llSingleLessonTime);
         ArrayList<Lesson> curLessones = singleLessonTimes.get(position);
-        for (Lesson lesson:curLessones) {
-            final LessonItemLayout lessonItemLayout = new LessonItemLayout(context, lesson.getId());
+        for (final Lesson lesson:curLessones) {
+            final LessonItemLayout lessonItemLayout = new LessonItemLayout(context, lesson);
             ((TextView)lessonItemLayout.findViewById(R.id.tvLessonName)).setText(lesson.getName());
             ((TextView)lessonItemLayout.findViewById(R.id.tvLessonClassroom)).setText(lesson.getClassroom());
             if (lesson.isTinyLesson()){
@@ -95,16 +99,35 @@ public class DayScheduleAdapter extends BaseAdapter {
                 tvSingleWeekLesson.setText(lesson.isOddWeekLesson() ? "单" : "双");
             }
             lessonItemLayout.setFocusable(true);
+            //TODO : 单击课程查看
             lessonItemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(context, "clicked lesson : " + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();
                 }
             });
+            //长按课程删除
             lessonItemLayout.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     Toast.makeText(context, "long clicked lesson : " + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(context).setTitle("Del Lesson").setMessage("Confirm to delete the lesson?")
+                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    OwnDbHelper dbHelper = new OwnDbHelper(context);
+                                    dbHelper.deleteLesson(lessonItemLayout.getLessonId());
+                                    ArrayList<Lesson> lessons = Constant.weekSchedule.get(lesson.getDayOfWeek()).get(lesson.getLessonTimeNum());
+                                    lessons.remove(lesson);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).show();
                     return false;
                 }
             });

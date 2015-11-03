@@ -23,13 +23,6 @@ public class OwnDbHelper extends SQLiteOpenHelper {
         this.context = context;
         Log.e(TAG, "sql construct");
 
-//        try {
-//            String del = "drop table " + dbScheduleTableName + ";";
-//            getWritableDatabase().execSQL(del);
-//        }catch (Exception e){
-//            Log.e(TAG, "del exception");
-//        }
-
 //        String sql = "create table if not exists " + dbScheduleTableName + "(" +
 //                "id integer primary key AUTOINCREMENT," +
 //                "name text not null," +
@@ -46,7 +39,7 @@ public class OwnDbHelper extends SQLiteOpenHelper {
 //                ");";
 //        getWritableDatabase().execSQL(sql);
 
-//        showAllData();
+        showAllData();
     }
 
     //show all date in db

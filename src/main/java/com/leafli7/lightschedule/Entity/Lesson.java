@@ -20,6 +20,15 @@ public class Lesson {
     private boolean isOddWeekLesson; //是否为奇数周课程
     private int dayOfWeek;
 
+    public static final int DAY_MONDAY = 0;
+    public static final int DAY_TUESDAY = 1;
+    public static final int DAY_WEDNESDAY = 2;
+    public static final int DAY_THURSDAY = 3;
+    public static final int DAY_FRIDAY = 4;
+    public static final int DAY_SATURDAY = 5;
+    public static final int DAY_SUNDAY = 6;
+
+
     public Lesson(){
         isTinyLesson = false;
         isSingleWeekLesson = false;
