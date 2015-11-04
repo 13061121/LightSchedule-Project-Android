@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +76,9 @@ public class DayScheduleAdapter extends BaseAdapter {
             @Override
             public boolean onLongClick(View v) {
                 Intent i = new Intent(context, AddLessonActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt(AddLessonActivity.MODE, AddLessonActivity.ADD_MODE);
+                i.putExtras(bundle);
                 context.startActivity(i);
                 Log.e(TAG, "leafli : wait for add activity!");
                 Toast.makeText(context, "long clicked LessonTimeNum " + position, Toast.LENGTH_SHORT).show();
@@ -103,6 +107,11 @@ public class DayScheduleAdapter extends BaseAdapter {
             lessonItemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent i = new Intent(context, AddLessonActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(AddLessonActivity.MODE, AddLessonActivity.VIEW_MODE);
+                    i.putExtras(bundle);
+                    context.startActivity(i);
                     Toast.makeText(context, "clicked lesson : " + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -146,5 +155,10 @@ public class DayScheduleAdapter extends BaseAdapter {
         tvLessonTime.setText(lessonTime[position]);
 
         return llMain;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
     }
 }

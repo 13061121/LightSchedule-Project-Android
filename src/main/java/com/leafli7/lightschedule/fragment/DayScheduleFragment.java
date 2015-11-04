@@ -56,4 +56,7 @@ public class DayScheduleFragment extends Fragment {
         Log.e(TAG, TAG + " onStart");
     }
 
+    public ListView getLvDayScheduleListView() {
+        return lvDayScheduleListView;
+    }
 }

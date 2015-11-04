@@ -39,7 +39,7 @@ public class OwnDbHelper extends SQLiteOpenHelper {
 //                ");";
 //        getWritableDatabase().execSQL(sql);
 
-        showAllData();
+//        showAllData();
     }
 
     //show all date in db

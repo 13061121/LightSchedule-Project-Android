@@ -26,6 +26,9 @@
     <string name="odd">Odd</string>
     <string name="even">Even</string>
     <string name="action_add">add</string>
+    <string name="action_modify">modify</string>
+    <string name="action_finish_modify">finish</string>
+    <string name="modify_lesson">Modify lesson</string>
 
 
 </resources>
