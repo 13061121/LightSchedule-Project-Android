@@ -1,12 +1,15 @@
 package com.leafli7.lightschedule.Entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
  * @author leafli7
  * Created by xxcub on 2015/10/29.
  */
-public class Lesson {
+public class Lesson implements Parcelable{
     private int id;
     private String name;
     private int startWeek;
@@ -28,6 +31,54 @@ public class Lesson {
     public static final int DAY_SATURDAY = 5;
     public static final int DAY_SUNDAY = 6;
 
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeInt(startWeek);
+        dest.writeInt(endWeek);
+        dest.writeInt(lessonTimeNum);
+        dest.writeString(teacherName);
+        dest.writeString(classroom);
+        dest.writeInt(dayOfWeek);
+        dest.writeByte((byte) (isTinyLesson ? 1 : 0));
+        dest.writeByte((byte) (isFirstHalf ? 1 : 0));
+        dest.writeByte((byte) (isSingleWeekLesson ? 1 : 0));
+        dest.writeByte((byte) (isOddWeekLesson?1:0));
+    }
+
+    protected Lesson(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        startWeek = in.readInt();
+        endWeek = in.readInt();
+        lessonTimeNum = in.readInt();
+        teacherName = in.readString();
+        classroom = in.readString();
+        dayOfWeek = in.readInt();
+        isTinyLesson = (in.readByte() == 1);
+        isFirstHalf = (in.readByte() == 1);
+        isSingleWeekLesson = (in.readByte() == 1);
+        isOddWeekLesson = (in.readByte() == 1);
+    }
+
+    public static final Creator<Lesson> CREATOR = new Creator<Lesson>() {
+        @Override
+        public Lesson createFromParcel(Parcel in) {
+            return new Lesson(in);
+        }
+
+        @Override
+        public Lesson[] newArray(int size) {
+            return new Lesson[size];
+        }
+    };
 
     public Lesson(){
         isTinyLesson = false;

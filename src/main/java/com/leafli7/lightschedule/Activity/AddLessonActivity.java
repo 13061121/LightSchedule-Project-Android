@@ -1,8 +1,6 @@
 package com.leafli7.lightschedule.Activity;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -44,36 +43,43 @@ public class AddLessonActivity extends AppCompatActivity {
     private RadioButton mRbOddRadioButton;
     private RadioButton mRbEvenRadioButton;
     private RadioGroup mRgIsSingleWeekLessonRadioGroup;
+    private Menu menu;
 
     private int curMode = 0;
-    private Menu menu;
+    private Lesson curLesson;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lesson);
-        initialFindview();
+        initialFindView();
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        curLesson = null;
         curMode = (int) bundle.get(MODE);
         switch (curMode) {
             case VIEW_MODE:
+                curLesson = bundle.getParcelable("lesson");
+                initialWidgetText();
                 setEditMode(false);
+                mToolbar.setTitle(R.string.view_lesson);
                 break;
             case ADD_MODE:
+                mToolbar.setTitle(R.string.title_activity_add_lesson);
             case MODIFY_MODE:
+                mToolbar.setTitle(R.string.modify_lesson);
                 setEditMode(true);
                 break;
             default:
                 Log.e(TAG, "Wrong mode!");
         }
-        mToolbar.setTitle(getString(R.string.title_activity_add_lesson));
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
-    private void initialFindview() {
+    private void initialFindView() {
         mEtLessonTitleEditText = (EditText) findViewById(R.id.etLessonTitle);
         mEtClassroomEditText = (EditText) findViewById(R.id.etClassroom);
         mEtTeacherNameEditText = (EditText) findViewById(R.id.etTeacherName);
@@ -90,6 +96,52 @@ public class AddLessonActivity extends AppCompatActivity {
         mRbEvenRadioButton = (RadioButton) findViewById(R.id.rbEven);
         mRgIsSingleWeekLessonRadioGroup = (RadioGroup) findViewById(R.id.rgIsSingleWeekLesson);
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+
+        mCbIsTinyLessonCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    mRgIsTinyLessonRadioGroup.setVisibility(View.VISIBLE);
+                    mRbFirstRadioButton.setChecked(true);
+                }else {
+                    mRgIsTinyLessonRadioGroup.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        mCbIsSingleWeekLessonCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    mRgIsSingleWeekLessonRadioGroup.setVisibility(View.VISIBLE);
+                    mRbOddRadioButton.setChecked(true);
+                }else {
+                    mRgIsSingleWeekLessonRadioGroup.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+    }
+
+    private void initialWidgetText() {
+        mEtLessonTitleEditText.setText(curLesson.getName());
+        mEtClassroomEditText.setText(curLesson.getClassroom());
+        mEtTeacherNameEditText.setText(curLesson.getTeacherName());
+        if (curLesson.isTinyLesson()){
+            mCbIsTinyLessonCheckBox.setChecked(true);
+            if (curLesson.isFirstHalf()){
+                mRbFirstRadioButton.setChecked(true);
+            }else {
+                mRbSecondRadioButton.setChecked(true);
+            }
+        }
+
+        if (curLesson.isSingleWeekLesson()){
+            mCbIsSingleWeekLessonCheckBox.setChecked(true);
+            if (curLesson.isOddWeekLesson()){
+                mRbOddRadioButton.setChecked(true);
+            }else {
+                mRbEvenRadioButton.setChecked(false);
+            }
+        }
     }
 
     public void setEditMode(boolean isEditable) {
@@ -118,8 +170,25 @@ public class AddLessonActivity extends AppCompatActivity {
 
     }
 
-    private void addLesson(Lesson lesson){
-        Constant.weekSchedule.get(lesson.getDayOfWeek()).get(lesson.getLessonTimeNum()).add(lesson);
+    private void addLesson(){
+        curLesson = new Lesson(mEtClassroomEditText.getText().toString(), 0, mEtLessonTitleEditText.getText().toString(), 0, 0, 0, mEtTeacherNameEditText.getText().toString(), 0);
+        curLesson.setIsTinyLesson(mCbIsTinyLessonCheckBox.isChecked());
+        if (mCbIsTinyLessonCheckBox.isChecked()){
+            if (mRbFirstRadioButton.isChecked()){
+                curLesson.setIsFirstHalf(true);
+            }else {
+                curLesson.setIsFirstHalf(false);
+            }
+        }
+        curLesson.setIsSingleWeekLesson(mCbIsSingleWeekLessonCheckBox.isChecked());
+        if (mCbIsSingleWeekLessonCheckBox.isChecked()){
+            if (mRbOddRadioButton.isChecked()){
+                curLesson.setIsOddWeekLesson(true);
+            }else {
+                curLesson.setIsOddWeekLesson(false);
+            }
+        }
+        Constant.weekSchedule.get(curLesson.getDayOfWeek()).get(curLesson.getLessonTimeNum()).add(curLesson);
     }
 
     @Override
@@ -168,7 +237,7 @@ public class AddLessonActivity extends AppCompatActivity {
             finish();
 //            getMenuInflater().inflate(R.menu.menu_add_lesson_view_mode, menu);
         }else if (id == R.id.action_add){
-            addLesson(new Lesson("test room", 0, "test class", 0, 0, 0, "test teacher", 0));
+            addLesson();
             finish();
         }
 

@@ -78,6 +78,7 @@ public class DayScheduleAdapter extends BaseAdapter {
                 Intent i = new Intent(context, AddLessonActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt(AddLessonActivity.MODE, AddLessonActivity.ADD_MODE);
+
                 i.putExtras(bundle);
                 context.startActivity(i);
                 Log.e(TAG, "leafli : wait for add activity!");
@@ -110,6 +111,7 @@ public class DayScheduleAdapter extends BaseAdapter {
                     Intent i = new Intent(context, AddLessonActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt(AddLessonActivity.MODE, AddLessonActivity.VIEW_MODE);
+                    bundle.putParcelable("lesson", lesson);
                     i.putExtras(bundle);
                     context.startActivity(i);
                     Toast.makeText(context, "clicked lesson : " + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();

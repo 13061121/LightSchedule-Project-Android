@@ -29,6 +29,7 @@
     <string name="action_modify">modify</string>
     <string name="action_finish_modify">finish</string>
     <string name="modify_lesson">Modify lesson</string>
+    <string name="view_lesson">View Lesson</string>
 
 
 </resources>
