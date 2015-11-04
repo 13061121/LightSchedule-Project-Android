@@ -100,32 +100,32 @@ public class OwnDbHelper extends SQLiteOpenHelper {
             int isOdd = lesson.isOddWeekLesson()?1:0;
             String sql = "";
             if (!lesson.isSingleWeekLesson() && !lesson.isTinyLesson()) {
-                sql = "insert into " + dbScheduleTableName + "" +
+                sql = "insert into " + dbScheduleTableName +
                         "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_single_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
                         "values " +
                         "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() +  ",'" + lesson.getTeacherName()+ "'" +
                         ",'" + lesson.getClassroom() + "'," + isTiny + "," + isSingle + "," + lesson.getDayOfWeek() + ")";
                 getWritableDatabase().execSQL(sql);
             }else if (lesson.isSingleWeekLesson() && !lesson.isTinyLesson()){
-                sql = "insert into " + dbScheduleTableName + " {" +
+                sql = "insert into " + dbScheduleTableName +
                         "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_single_week_lesson,is_odd_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
                         "values " +
                         "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() + ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + lesson.isTinyLesson() + "," + lesson.isSingleWeekLesson() + "," + lesson.isOddWeekLesson() + "," + lesson.getDayOfWeek() + ")";
+                        ",'" + lesson.getClassroom() + "'," + isTiny + "," + isSingle + "," + isOdd + "," + lesson.getDayOfWeek() + ")";
                 getWritableDatabase().execSQL(sql);
             }else if (!lesson.isSingleWeekLesson() && lesson.isTinyLesson()){
-                sql = "insert into " + dbScheduleTableName + " {" +
+                sql = "insert into " + dbScheduleTableName +
                         "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_first_half,is_single_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
                         "values " +
                         "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() + ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + lesson.isTinyLesson() + "," + lesson.isFirstHalf() + ","+ lesson.isSingleWeekLesson() + "," + lesson.getDayOfWeek() + ")";
+                        ",'" + lesson.getClassroom() + "'," + isTiny + "," + isFirst + ","+ isSingle + "," + lesson.getDayOfWeek() + ")";
                 getWritableDatabase().execSQL(sql);
             }else if (lesson.isSingleWeekLesson() && lesson.isTinyLesson()){
-                sql = "insert into " + dbScheduleTableName + " {" +
-                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_first_half,is_single_week_lesson,is_odd_week-lesson," + Constant.tableColumnDayOfWeek + ") " +
+                sql = "insert into " + dbScheduleTableName +
+                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_first_half,is_single_week_lesson,is_odd_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
                         "values " +
                         "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() + ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + lesson.isTinyLesson() + "," + lesson.isFirstHalf() + ","+ lesson.isSingleWeekLesson() + "," + lesson.isOddWeekLesson() + "," + lesson.getDayOfWeek() + ")";
+                        ",'" + lesson.getClassroom() + "'," + isTiny + "," + isFirst + ","+ isSingle + "," + isOdd + "," + lesson.getDayOfWeek() + ")";
                 getWritableDatabase().execSQL(sql);
             }else{
                 Log.e(TAG, "no sql insert!");

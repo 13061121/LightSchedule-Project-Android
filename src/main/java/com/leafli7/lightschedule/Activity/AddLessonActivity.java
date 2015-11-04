@@ -19,6 +19,9 @@ import android.widget.Spinner;
 import com.example.lightschedule.R;
 import com.leafli7.lightschedule.Entity.Lesson;
 import com.leafli7.lightschedule.Utils.Constant;
+import com.leafli7.lightschedule.Utils.OwnDbHelper;
+
+import java.util.ArrayList;
 
 public class AddLessonActivity extends AppCompatActivity {
     private String TAG = Constant.TAG + getClass().getSimpleName();
@@ -80,6 +83,7 @@ public class AddLessonActivity extends AppCompatActivity {
     }
 
     private void initialFindView() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         mEtLessonTitleEditText = (EditText) findViewById(R.id.etLessonTitle);
         mEtClassroomEditText = (EditText) findViewById(R.id.etClassroom);
         mEtTeacherNameEditText = (EditText) findViewById(R.id.etTeacherName);
@@ -95,15 +99,14 @@ public class AddLessonActivity extends AppCompatActivity {
         mRbOddRadioButton = (RadioButton) findViewById(R.id.rbOdd);
         mRbEvenRadioButton = (RadioButton) findViewById(R.id.rbEven);
         mRgIsSingleWeekLessonRadioGroup = (RadioGroup) findViewById(R.id.rgIsSingleWeekLesson);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
 
         mCbIsTinyLessonCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     mRgIsTinyLessonRadioGroup.setVisibility(View.VISIBLE);
                     mRbFirstRadioButton.setChecked(true);
-                }else {
+                } else {
                     mRgIsTinyLessonRadioGroup.setVisibility(View.INVISIBLE);
                 }
             }
@@ -111,10 +114,10 @@ public class AddLessonActivity extends AppCompatActivity {
         mCbIsSingleWeekLessonCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     mRgIsSingleWeekLessonRadioGroup.setVisibility(View.VISIBLE);
                     mRbOddRadioButton.setChecked(true);
-                }else {
+                } else {
                     mRgIsSingleWeekLessonRadioGroup.setVisibility(View.INVISIBLE);
                 }
             }
@@ -139,7 +142,7 @@ public class AddLessonActivity extends AppCompatActivity {
             if (curLesson.isOddWeekLesson()){
                 mRbOddRadioButton.setChecked(true);
             }else {
-                mRbEvenRadioButton.setChecked(false);
+                mRbEvenRadioButton.setChecked(true);
             }
         }
     }
@@ -166,11 +169,7 @@ public class AddLessonActivity extends AppCompatActivity {
         }
     }
 
-    private void updateLesson(Lesson lesson){
-
-    }
-
-    private void addLesson(){
+    private void updateCurLesson(){
         curLesson = new Lesson(mEtClassroomEditText.getText().toString(), 0, mEtLessonTitleEditText.getText().toString(), 0, 0, 0, mEtTeacherNameEditText.getText().toString(), 0);
         curLesson.setIsTinyLesson(mCbIsTinyLessonCheckBox.isChecked());
         if (mCbIsTinyLessonCheckBox.isChecked()){
@@ -188,6 +187,27 @@ public class AddLessonActivity extends AppCompatActivity {
                 curLesson.setIsOddWeekLesson(false);
             }
         }
+    }
+
+    private void addLesson(){
+        updateCurLesson();
+        Constant.weekSchedule.get(curLesson.getDayOfWeek()).get(curLesson.getLessonTimeNum()).add(curLesson);
+        OwnDbHelper dbHelper = new OwnDbHelper(this);
+        dbHelper.insertLesson(curLesson);
+    }
+
+    private void modifyLesson(){
+        OwnDbHelper dbHelper = new OwnDbHelper(this);
+        dbHelper.deleteLesson(curLesson.getId());
+        ArrayList<Lesson> lessons = Constant.weekSchedule.get(curLesson.getDayOfWeek()).get(curLesson.getLessonTimeNum());
+        for (int i = 0; i < lessons.size(); i++){
+            if (lessons.get(i).getId() == curLesson.getId()){
+                lessons.remove(i);
+                break;
+            }
+        }
+        updateCurLesson();
+        dbHelper.insertLesson(curLesson);
         Constant.weekSchedule.get(curLesson.getDayOfWeek()).get(curLesson.getLessonTimeNum()).add(curLesson);
     }
 
@@ -232,8 +252,7 @@ public class AddLessonActivity extends AppCompatActivity {
             getMenuInflater().inflate(R.menu.menu_add_lesson_modify, menu);
 
         }else if (id == R.id.action_finish_modify){
-            setEditMode(false);
-            menu.clear();
+            modifyLesson();
             finish();
 //            getMenuInflater().inflate(R.menu.menu_add_lesson_view_mode, menu);
         }else if (id == R.id.action_add){
@@ -246,6 +265,9 @@ public class AddLessonActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        //考虑是不是为了防止误触关闭back键功能
+        //或者存储back时的状态
+        //双击返回
         finish();
     }
 
