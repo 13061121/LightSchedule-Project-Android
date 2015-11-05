@@ -33,7 +33,6 @@ public class DayScheduleAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<SingleLessonTime> singleLessonTimes = new ArrayList<>();
     private int curAdapterDayOfWeek;
-    private int curAdapterLessonTimeNum;
 
     public DayScheduleAdapter(Context context, int curAdapterDayOfWeek){
         this.context = context;
@@ -78,7 +77,8 @@ public class DayScheduleAdapter extends BaseAdapter {
                 Intent i = new Intent(context, AddLessonActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt(AddLessonActivity.MODE, AddLessonActivity.ADD_MODE);
-
+                bundle.putInt("dayOfWeek", curAdapterDayOfWeek);
+                bundle.putInt("lessonTimeNum", position);
                 i.putExtras(bundle);
                 context.startActivity(i);
                 Log.e(TAG, "leafli : wait for add activity!");

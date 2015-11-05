@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
      * {@link SlidingTabLayout}.
      */
     class MainTabs extends PagerAdapter {
-        String[] week = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+        String[] week = Constant.DAY_OF_WEEK;
         HashMap<String, DayScheduleFragment> fragmentHashMap = new HashMap<String, DayScheduleFragment>();
 
         SparseArray<View> views = new SparseArray<View>();

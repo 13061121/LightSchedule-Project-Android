@@ -1,5 +1,6 @@
 package com.leafli7.lightschedule.Utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,13 +16,13 @@ import com.leafli7.lightschedule.Entity.Lesson;
 public class OwnDbHelper extends SQLiteOpenHelper {
     String TAG = Constant.TAG + getClass().getSimpleName();
     private static String dbScheduleTableName = Constant.DbScheduleTableName;
-    private static int version  = 1;
+    private static int version = 1;
     private Context context;
 
     public OwnDbHelper(Context context) {
         super(context, dbScheduleTableName, null, version);
         this.context = context;
-        Log.e(TAG, "sql construct");
+//        Log.e(TAG, "sql construct");
 
 //        String sql = "create table if not exists " + dbScheduleTableName + "(" +
 //                "id integer primary key AUTOINCREMENT," +
@@ -44,15 +45,15 @@ public class OwnDbHelper extends SQLiteOpenHelper {
 
     //show all date in db
     //for debug
-    void showAllData(){
+    void showAllData() {
         SQLiteDatabase db = getWritableDatabase();
         String sql = "select * from " + dbScheduleTableName + ";";
         Log.e(TAG, "Show all data from database");
         Cursor cursor = db.rawQuery(sql, null);
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             Log.e(TAG, "------");
             String[] names = cursor.getColumnNames();
-            for (String name:names) {
+            for (String name : names) {
                 Log.e(TAG, name + " : " + cursor.getString(cursor.getColumnIndex(name)));
             }
             Log.e(TAG, "------");
@@ -92,59 +93,49 @@ public class OwnDbHelper extends SQLiteOpenHelper {
         Log.e(TAG, "sqlite oncreate");
     }
 
-    public boolean insertLesson(Lesson lesson){
-        try{
-            int isTiny = lesson.isTinyLesson()?1:0;
-            int isSingle = lesson.isSingleWeekLesson()?1:0;
-            int isFirst = lesson.isFirstHalf()?1:0;
-            int isOdd = lesson.isOddWeekLesson()?1:0;
-            String sql = "";
-            if (!lesson.isSingleWeekLesson() && !lesson.isTinyLesson()) {
-                sql = "insert into " + dbScheduleTableName +
-                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_single_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
-                        "values " +
-                        "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() +  ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + isTiny + "," + isSingle + "," + lesson.getDayOfWeek() + ")";
-                getWritableDatabase().execSQL(sql);
-            }else if (lesson.isSingleWeekLesson() && !lesson.isTinyLesson()){
-                sql = "insert into " + dbScheduleTableName +
-                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_single_week_lesson,is_odd_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
-                        "values " +
-                        "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() + ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + isTiny + "," + isSingle + "," + isOdd + "," + lesson.getDayOfWeek() + ")";
-                getWritableDatabase().execSQL(sql);
-            }else if (!lesson.isSingleWeekLesson() && lesson.isTinyLesson()){
-                sql = "insert into " + dbScheduleTableName +
-                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_first_half,is_single_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
-                        "values " +
-                        "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() + ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + isTiny + "," + isFirst + ","+ isSingle + "," + lesson.getDayOfWeek() + ")";
-                getWritableDatabase().execSQL(sql);
-            }else if (lesson.isSingleWeekLesson() && lesson.isTinyLesson()){
-                sql = "insert into " + dbScheduleTableName +
-                        "(name,start_week,end_week,lesson_time_num,teacher_name,classroom,is_tiny_lesson,is_first_half,is_single_week_lesson,is_odd_week_lesson," + Constant.tableColumnDayOfWeek + ") " +
-                        "values " +
-                        "('" + lesson.getName() + "'," + lesson.getStartWeek() + "," + lesson.getEndWeek() + "," + lesson.getLessonTimeNum() + ",'" + lesson.getTeacherName()+ "'" +
-                        ",'" + lesson.getClassroom() + "'," + isTiny + "," + isFirst + ","+ isSingle + "," + isOdd + "," + lesson.getDayOfWeek() + ")";
-                getWritableDatabase().execSQL(sql);
-            }else{
-                Log.e(TAG, "no sql insert!");
-            }
-        }catch (Exception e){
+    /**
+     *
+     * @param lesson
+     * @return  返回插入课程的id
+     */
+    public int insertLesson(Lesson lesson) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        long rowid = -1;
+        try {
+            cv.put(Constant.tableColumnName, lesson.getName());
+            cv.put(Constant.tableColumnStartWeek, lesson.getStartWeek());
+            cv.put(Constant.tableColumnEndWeek, lesson.getEndWeek());
+            cv.put(Constant.tableColumnLessonTimeNum, lesson.getLessonTimeNum());
+            cv.put(Constant.tableColumnTeacherName, lesson.getTeacherName());
+            cv.put(Constant.tableColumnClassroom, lesson.getClassroom());
+            cv.put(Constant.tableColumnIsTinyLesson, lesson.isTinyLesson() ? 1 : 0);
+            cv.put(Constant.tableColumnIsFirstHalf, lesson.isFirstHalf() ? 1 : 0);
+            cv.put(Constant.tableColumnIsSingleWeekLesson, lesson.isSingleWeekLesson() ? 1 : 0);
+            cv.put(Constant.tableColumnIsOddWeekLesson, lesson.isOddWeekLesson() ? 1 : 0);
+            cv.put(Constant.tableColumnDayOfWeek, lesson.getDayOfWeek());
+            rowid = db.insert(dbScheduleTableName, null, cv);
+
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
             Toast.makeText(context, "Wrong input info! Please check!", Toast.LENGTH_SHORT).show();
             Log.e(TAG, "wrong input info! Exception!");
             Log.e(TAG, e.toString());
-            return false;
+            return -1;
         }
 
-        return true;
+        Cursor c = db.rawQuery("select id from " + dbScheduleTableName + " where id=" + rowid + ";", null);
+        c.moveToFirst();
+        Log.e(TAG, "return lessonId" + String.valueOf(c.getInt(0)));
+        return c.getInt(0);
     }
 
-    public boolean deleteLesson(int lessonId){
+    public boolean deleteLesson(int lessonId) {
         try {
             String sql = "delete from " + dbScheduleTableName + " where id=" + lessonId + ";";
             getWritableDatabase().execSQL(sql);
-        }catch(Exception e){
+            Log.e(TAG, "delete");
+        } catch (Exception e) {
             e.printStackTrace();
             Log.e(TAG, "delete item exception!");
             Toast.makeText(context, "delete item exception!", Toast.LENGTH_SHORT).show();
@@ -152,10 +143,32 @@ public class OwnDbHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Cursor querySchedule(){
+    public int updateLesson(Lesson lesson) {
+        Log.e(TAG, "updateLesson id " + lesson.getId());
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(Constant.tableColumnName, lesson.getName());
+        cv.put(Constant.tableColumnStartWeek, lesson.getStartWeek());
+        cv.put(Constant.tableColumnEndWeek, lesson.getEndWeek());
+        cv.put(Constant.tableColumnLessonTimeNum, lesson.getLessonTimeNum());
+        cv.put(Constant.tableColumnTeacherName, lesson.getTeacherName());
+        cv.put(Constant.tableColumnClassroom, lesson.getClassroom());
+        cv.put(Constant.tableColumnIsTinyLesson, lesson.isTinyLesson() ? 1 : 0);
+        cv.put(Constant.tableColumnIsFirstHalf, lesson.isFirstHalf() ? 1 : 0);
+        cv.put(Constant.tableColumnIsSingleWeekLesson, lesson.isSingleWeekLesson() ? 1 : 0);
+        cv.put(Constant.tableColumnIsOddWeekLesson, lesson.isOddWeekLesson() ? 1 : 0);
+        cv.put(Constant.tableColumnDayOfWeek, lesson.getDayOfWeek());
+        String[] args = {String.valueOf(lesson.getId())};
+        int rtn = db.update(dbScheduleTableName, cv, Constant.tableColumnId + "=?", args);
+        Log.e(TAG, "update return : " + String.valueOf(rtn));
+        return rtn;
+    }
+
+    public Cursor querySchedule() {
         String sql = "select * from " + dbScheduleTableName + ";";
         return getWritableDatabase().rawQuery(sql, null);
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

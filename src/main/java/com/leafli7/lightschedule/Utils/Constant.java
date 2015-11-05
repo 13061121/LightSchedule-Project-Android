@@ -18,12 +18,14 @@ public abstract class Constant {
      * 即，程序中的第０周代表数据库（实际上）的第一周．
      */
     public static final String TAG = "leafli7 debug : ";
+    public static final String[] DAY_OF_WEEK = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
     public static Context context;
     public static int DAY_ACCOUNT_OF_ONE_WEEK = 7;
     public static int CURRENT_WEEK = 0;
     public static int CURRENT_DAY_OF_WEEK = 0;
     public static int LESSEN_TIME_ACCOUNT = 6;
+    public static int WEEK_NUMS = 20;
     public static String[] LESSON_NUM = {"一", "二", "三", "四", "五", "六"};
     public static String[] LESSON_TIME = {"8:00\n9:45", "10:00\n11:45", "14:00\n15:45", "16:00\n17:45", "18:00\n19:45", "20:00\n21:45"};
     public static final String DbScheduleTableName = "own_schedule";
@@ -52,7 +54,8 @@ public abstract class Constant {
         initialWeekSchedule();
     }
 
-    private static void initialWeekSchedule() {
+
+    public static void initialWeekSchedule() {
         weekSchedule = new WeekSchedule();
 
         OwnDbHelper ownDbHelper = new OwnDbHelper(context);

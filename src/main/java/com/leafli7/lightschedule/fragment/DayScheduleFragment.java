@@ -53,7 +53,7 @@ public class DayScheduleFragment extends Fragment {
         lvDayScheduleListView = (ListView) view.findViewById(R.id.lvDayScheduleListView);
         lvDayScheduleListView.setAdapter(new DayScheduleAdapter(getActivity(), curFragmentDayOfWeek));
 
-        Log.e(TAG, TAG + " onStart");
+//        Log.e(TAG, TAG + " onStart");
     }
 
     public ListView getLvDayScheduleListView() {

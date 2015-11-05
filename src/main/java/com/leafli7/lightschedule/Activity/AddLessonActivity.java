@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -48,8 +50,13 @@ public class AddLessonActivity extends AppCompatActivity {
     private RadioGroup mRgIsSingleWeekLessonRadioGroup;
     private Menu menu;
 
+    private ArrayAdapter<String> weekAdapater;
+    private ArrayAdapter<String> dayAdapter;
+    private ArrayAdapter<String> sectionAdapter;
+
     private int curMode = 0;
     private Lesson curLesson;
+    private int startWeek = 0, endWeek = 0, lessonTimeNum = 0, dayOfWeek = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +71,13 @@ public class AddLessonActivity extends AppCompatActivity {
         switch (curMode) {
             case VIEW_MODE:
                 curLesson = bundle.getParcelable("lesson");
-                initialWidgetText();
+                initialViewModeWidgetText();
                 setEditMode(false);
                 mToolbar.setTitle(R.string.view_lesson);
                 break;
             case ADD_MODE:
+                curLesson = new Lesson();
+                initialAddModeWidgetText();
                 mToolbar.setTitle(R.string.title_activity_add_lesson);
             case MODIFY_MODE:
                 mToolbar.setTitle(R.string.modify_lesson);
@@ -122,9 +131,69 @@ public class AddLessonActivity extends AppCompatActivity {
                 }
             }
         });
+
+        String[] weekArray = new String[Constant.WEEK_NUMS];
+        for (int i = 0; i < weekArray.length; i++){
+            weekArray[i] = String.valueOf(i+1);
+        }
+        weekAdapater = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, weekArray);
+        weekAdapater.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        mSpStartWeekSpinner.setAdapter(weekAdapater);
+        mSpEndWeekSpinner.setAdapter(weekAdapater);
+        mSpStartWeekSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                startWeek = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        mSpEndWeekSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                endWeek = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+        dayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, Constant.DAY_OF_WEEK);
+        dayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        mSpDayOfWeekSpinner.setAdapter(dayAdapter);
+        mSpDayOfWeekSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                dayOfWeek = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        String[] sectionArray = new String[Constant.LESSEN_TIME_ACCOUNT];
+        for (int i = 0; i < sectionArray.length; i++){
+            sectionArray[i] = String.valueOf(i+1);
+        }
+        sectionAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sectionArray);
+        sectionAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        mSpLessonTimeNumSpinner.setAdapter(sectionAdapter);
+        mSpLessonTimeNumSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                lessonTimeNum = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
     }
 
-    private void initialWidgetText() {
+    private void initialViewModeWidgetText() {
         mEtLessonTitleEditText.setText(curLesson.getName());
         mEtClassroomEditText.setText(curLesson.getClassroom());
         mEtTeacherNameEditText.setText(curLesson.getTeacherName());
@@ -145,6 +214,18 @@ public class AddLessonActivity extends AppCompatActivity {
                 mRbEvenRadioButton.setChecked(true);
             }
         }
+
+        mSpStartWeekSpinner.setSelection(curLesson.getStartWeek());
+        mSpEndWeekSpinner.setSelection(curLesson.getEndWeek());
+        mSpDayOfWeekSpinner.setSelection(curLesson.getDayOfWeek());
+        mSpLessonTimeNumSpinner.setSelection(curLesson.getLessonTimeNum());
+    }
+
+    private void initialAddModeWidgetText() {
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
+        mSpDayOfWeekSpinner.setSelection(b.getInt("dayOfWeek"));
+        mSpLessonTimeNumSpinner.setSelection(b.getInt("lessonTimeNum"));
     }
 
     public void setEditMode(boolean isEditable) {
@@ -170,7 +251,9 @@ public class AddLessonActivity extends AppCompatActivity {
     }
 
     private void updateCurLesson(){
-        curLesson = new Lesson(mEtClassroomEditText.getText().toString(), 0, mEtLessonTitleEditText.getText().toString(), 0, 0, 0, mEtTeacherNameEditText.getText().toString(), 0);
+        curLesson.setClassroom(mEtClassroomEditText.getText().toString());
+        curLesson.setName(mEtLessonTitleEditText.getText().toString());
+        curLesson.setTeacherName(mEtTeacherNameEditText.getText().toString());
         curLesson.setIsTinyLesson(mCbIsTinyLessonCheckBox.isChecked());
         if (mCbIsTinyLessonCheckBox.isChecked()){
             if (mRbFirstRadioButton.isChecked()){
@@ -187,18 +270,26 @@ public class AddLessonActivity extends AppCompatActivity {
                 curLesson.setIsOddWeekLesson(false);
             }
         }
+
+        curLesson.setStartWeek(startWeek);
+        curLesson.setEndWeek(endWeek);
+        curLesson.setDayOfWeek(dayOfWeek);
+        curLesson.setLessonTimeNum(lessonTimeNum);
     }
 
     private void addLesson(){
         updateCurLesson();
-        Constant.weekSchedule.get(curLesson.getDayOfWeek()).get(curLesson.getLessonTimeNum()).add(curLesson);
         OwnDbHelper dbHelper = new OwnDbHelper(this);
-        dbHelper.insertLesson(curLesson);
+        int insertId = dbHelper.insertLesson(curLesson);
+        curLesson.setId(insertId);
+        Constant.weekSchedule.get(curLesson.getDayOfWeek()).get(curLesson.getLessonTimeNum()).add(curLesson);
+//        Constant.initialWeekSchedule();
     }
 
+    //TODO : 将刷新weekschedule修改为查找新插入的lesson在数据库中的id然后赋值
     private void modifyLesson(){
         OwnDbHelper dbHelper = new OwnDbHelper(this);
-        dbHelper.deleteLesson(curLesson.getId());
+        //查找删除
         ArrayList<Lesson> lessons = Constant.weekSchedule.get(curLesson.getDayOfWeek()).get(curLesson.getLessonTimeNum());
         for (int i = 0; i < lessons.size(); i++){
             if (lessons.get(i).getId() == curLesson.getId()){
@@ -207,8 +298,9 @@ public class AddLessonActivity extends AppCompatActivity {
             }
         }
         updateCurLesson();
-        dbHelper.insertLesson(curLesson);
+        dbHelper.updateLesson(curLesson);
         Constant.weekSchedule.get(curLesson.getDayOfWeek()).get(curLesson.getLessonTimeNum()).add(curLesson);
+//        Constant.initialWeekSchedule();
     }
 
     @Override
