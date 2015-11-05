@@ -1,5 +1,7 @@
 package com.leafli7.lightschedule.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -133,8 +135,8 @@ public class AddLessonActivity extends AppCompatActivity {
         });
 
         String[] weekArray = new String[Constant.WEEK_NUMS];
-        for (int i = 0; i < weekArray.length; i++){
-            weekArray[i] = String.valueOf(i+1);
+        for (int i = 0; i < weekArray.length; i++) {
+            weekArray[i] = String.valueOf(i + 1);
         }
         weekAdapater = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, weekArray);
         weekAdapater.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -145,6 +147,7 @@ public class AddLessonActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 startWeek = position;
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -154,6 +157,7 @@ public class AddLessonActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 endWeek = position;
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -175,8 +179,8 @@ public class AddLessonActivity extends AppCompatActivity {
         });
 
         String[] sectionArray = new String[Constant.LESSEN_TIME_ACCOUNT];
-        for (int i = 0; i < sectionArray.length; i++){
-            sectionArray[i] = String.valueOf(i+1);
+        for (int i = 0; i < sectionArray.length; i++) {
+            sectionArray[i] = String.valueOf(i + 1);
         }
         sectionAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sectionArray);
         sectionAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -186,6 +190,7 @@ public class AddLessonActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 lessonTimeNum = position;
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -197,20 +202,20 @@ public class AddLessonActivity extends AppCompatActivity {
         mEtLessonTitleEditText.setText(curLesson.getName());
         mEtClassroomEditText.setText(curLesson.getClassroom());
         mEtTeacherNameEditText.setText(curLesson.getTeacherName());
-        if (curLesson.isTinyLesson()){
+        if (curLesson.isTinyLesson()) {
             mCbIsTinyLessonCheckBox.setChecked(true);
-            if (curLesson.isFirstHalf()){
+            if (curLesson.isFirstHalf()) {
                 mRbFirstRadioButton.setChecked(true);
-            }else {
+            } else {
                 mRbSecondRadioButton.setChecked(true);
             }
         }
 
-        if (curLesson.isSingleWeekLesson()){
+        if (curLesson.isSingleWeekLesson()) {
             mCbIsSingleWeekLessonCheckBox.setChecked(true);
-            if (curLesson.isOddWeekLesson()){
+            if (curLesson.isOddWeekLesson()) {
                 mRbOddRadioButton.setChecked(true);
-            }else {
+            } else {
                 mRbEvenRadioButton.setChecked(true);
             }
         }
@@ -250,23 +255,23 @@ public class AddLessonActivity extends AppCompatActivity {
         }
     }
 
-    private void updateCurLesson(){
+    private void updateCurLesson() {
         curLesson.setClassroom(mEtClassroomEditText.getText().toString());
         curLesson.setName(mEtLessonTitleEditText.getText().toString());
         curLesson.setTeacherName(mEtTeacherNameEditText.getText().toString());
         curLesson.setIsTinyLesson(mCbIsTinyLessonCheckBox.isChecked());
-        if (mCbIsTinyLessonCheckBox.isChecked()){
-            if (mRbFirstRadioButton.isChecked()){
+        if (mCbIsTinyLessonCheckBox.isChecked()) {
+            if (mRbFirstRadioButton.isChecked()) {
                 curLesson.setIsFirstHalf(true);
-            }else {
+            } else {
                 curLesson.setIsFirstHalf(false);
             }
         }
         curLesson.setIsSingleWeekLesson(mCbIsSingleWeekLessonCheckBox.isChecked());
-        if (mCbIsSingleWeekLessonCheckBox.isChecked()){
-            if (mRbOddRadioButton.isChecked()){
+        if (mCbIsSingleWeekLessonCheckBox.isChecked()) {
+            if (mRbOddRadioButton.isChecked()) {
                 curLesson.setIsOddWeekLesson(true);
-            }else {
+            } else {
                 curLesson.setIsOddWeekLesson(false);
             }
         }
@@ -277,7 +282,7 @@ public class AddLessonActivity extends AppCompatActivity {
         curLesson.setLessonTimeNum(lessonTimeNum);
     }
 
-    private void addLesson(){
+    private void addLesson() {
         updateCurLesson();
         OwnDbHelper dbHelper = new OwnDbHelper(this);
         int insertId = dbHelper.insertLesson(curLesson);
@@ -287,12 +292,12 @@ public class AddLessonActivity extends AppCompatActivity {
     }
 
     //TODO : 将刷新weekschedule修改为查找新插入的lesson在数据库中的id然后赋值
-    private void modifyLesson(){
+    private void modifyLesson() {
         OwnDbHelper dbHelper = new OwnDbHelper(this);
         //查找删除
         ArrayList<Lesson> lessons = Constant.weekSchedule.get(curLesson.getDayOfWeek()).get(curLesson.getLessonTimeNum());
-        for (int i = 0; i < lessons.size(); i++){
-            if (lessons.get(i).getId() == curLesson.getId()){
+        for (int i = 0; i < lessons.size(); i++) {
+            if (lessons.get(i).getId() == curLesson.getId()) {
                 lessons.remove(i);
                 break;
             }
@@ -337,17 +342,18 @@ public class AddLessonActivity extends AppCompatActivity {
         } else if (id == android.R.id.home) {
             Log.e(TAG, "Home clicked");
             this.finish();
-        }else if (id == R.id.action_modify){
+        } else if (id == R.id.action_modify) {
+            curMode = MODIFY_MODE;
             setEditMode(true);
             menu.clear();
             mToolbar.setTitle(R.string.modify_lesson);
             getMenuInflater().inflate(R.menu.menu_add_lesson_modify, menu);
 
-        }else if (id == R.id.action_finish_modify){
+        } else if (id == R.id.action_finish_modify) {
             modifyLesson();
             finish();
 //            getMenuInflater().inflate(R.menu.menu_add_lesson_view_mode, menu);
-        }else if (id == R.id.action_add){
+        } else if (id == R.id.action_add) {
             addLesson();
             finish();
         }
@@ -357,10 +363,22 @@ public class AddLessonActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //考虑是不是为了防止误触关闭back键功能
-        //或者存储back时的状态
-        //双击返回
-        finish();
-    }
+        if (curMode == ADD_MODE || curMode == MODIFY_MODE) {
+            new AlertDialog.Builder(this).setTitle("Exit Editing?").setMessage("Confirm to give up?")
+                    .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
+                    }).show();
+        } else {
+            finish();
+        }
+    }
 }
