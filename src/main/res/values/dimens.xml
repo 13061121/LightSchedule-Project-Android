@@ -12,4 +12,5 @@
     <dimen name="vertical_item_high72">72dp</dimen>
     <dimen name="toolbar_height">56dp</dimen>
     <dimen name="space_width">8dp</dimen>
+    <dimen name="status_height">24dp</dimen>
 </resources>

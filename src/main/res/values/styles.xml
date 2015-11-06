@@ -7,6 +7,7 @@
     <color name="colorMainBg">#FAFAFA</color>
 
     <color name="colorText">#000000</color>
+    <color name="colorTextSecondary">#727272</color>
     <color name="colorTextLight">#FFFFFF</color>
 
     <color name="navdrawer_background">#FFFFFF</color>
@@ -15,6 +16,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorMain</item>
 
@@ -49,7 +51,7 @@
     <style name="TabIndicator" />
 
     <declare-styleable name="ScrimInsetsView">
-        <attr name="insetForeground" format="reference|color" />
+        <attr name="insetUnAndroidSupportedDesignForeground" format="reference|color" />
     </declare-styleable>
 
     <integer name="font_textStyle_medium">1</integer> <!-- bold -->

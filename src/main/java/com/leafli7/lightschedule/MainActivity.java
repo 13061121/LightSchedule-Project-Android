@@ -1,17 +1,24 @@
 package com.leafli7.lightschedule;
 
 
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.internal.widget.TintManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -20,7 +27,9 @@ import com.leafli7.lightschedule.Entity.WeekSchedule;
 import com.leafli7.lightschedule.Fragment.MainScheduleFragment;
 import com.leafli7.lightschedule.Utils.Constant;
 import com.leafli7.lightschedule.Utils.OwnDbHelper;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 
 /**
@@ -42,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String mainScheduleFragment = "mainScheduleFragment";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,11 +63,21 @@ public class MainActivity extends AppCompatActivity {
         fragmentHashMap.put(mainScheduleFragment, new MainScheduleFragment());
         fragmentManager.beginTransaction().add(R.id.main_container, fragmentHashMap.get(mainScheduleFragment)).commit();
 
+
         initialDatabase();
+        initialStatue();
         Constant.initial(this);
         initialFindView();
         initialToolbar();
         initialNav();
+    }
+
+    private void initialStatue() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(ContextCompat.getColor(this, R.color.colorMainDark));
+        }
     }
 
     private void initialDatabase(){

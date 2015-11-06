@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="#424242"
+            android:textColor="@color/colorText"
             android:textSize="@dimen/abc_text_size_title_material" />
 
         <Space
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@color/material_grey_600"
+            android:textColor="@color/colorTextSecondary"
             android:textSize="@dimen/abc_text_size_subhead_material" />
 
     </LinearLayout>
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="后"
-            android:textColor="@color/material_grey_600"
+            android:textColor="@color/colorTextSecondary"
             android:textSize="@dimen/abc_text_size_subhead_material"
             android:visibility="invisible"/>
 
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="双"
-            android:textColor="@color/material_grey_600"
+            android:textColor="@color/colorTextSecondary"
             android:textSize="@dimen/abc_text_size_subhead_material"
             android:visibility="invisible"/>
 
