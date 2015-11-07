@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.lightschedule.R;
+import com.leafli7.lightschedule.Activity.QrCaptureActivity;
 import com.leafli7.lightschedule.Entity.WeekSchedule;
 import com.leafli7.lightschedule.Fragment.MainScheduleFragment;
 import com.leafli7.lightschedule.Utils.Constant;
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         qrCodeNavButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, CaptureActivity.class);
+                Intent i = new Intent(MainActivity.this, QrCaptureActivity.class);
                 startActivityForResult(i, 0);
             }
         });

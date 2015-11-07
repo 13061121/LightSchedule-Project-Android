@@ -21,6 +21,7 @@
             android:name="com.leafli7.lightschedule.Activity.AddLessonActivity"
             android:label="@string/title_activity_add_lesson" >
         </activity>
+        <activity android:name="com.leafli7.lightschedule.Activity.QrCaptureActivity"></activity>
     </application>
 
 </manifest>

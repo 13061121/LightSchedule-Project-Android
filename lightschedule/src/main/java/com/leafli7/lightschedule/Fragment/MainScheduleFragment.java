@@ -61,7 +61,6 @@ public class MainScheduleFragment extends android.support.v4.app.Fragment {
 
     }
 
-
     private void initialFindView() {
         mViewPager = (ViewPager) v.findViewById(R.id.view_pager_main_schedule_fragment);
         mViewPager.setOffscreenPageLimit(7); // tabcachesize (=tabcount for better performance)

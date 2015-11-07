@@ -2,67 +2,11 @@
 <items version="2" >
 
     <item
-        jar="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
-        <dex dex="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\pre-dexed\debug\classes-c4807863289138425c37a15d92f5e05a54a8f001.jar" />
-    </item>
-    <item
-        jar="C:\Users\xxcub\.gradle\caches\modules-2\files-2.1\com.readystatesoftware.systembartint\systembartint\1.0.3\de4f7404e2f58d8f6e83cb1e85d0c2d6c2987287\systembartint-1.0.3.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="de4f7404e2f58d8f6e83cb1e85d0c2d6c2987287">
-        <dex dex="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\pre-dexed\debug\systembartint-1.0.3-02b35885c140a52429ea3015be329f2bac8b9ca2.jar" />
-    </item>
-    <item
-        jar="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
-        <dex dex="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\pre-dexed\debug\classes-217997edc02e19103f49c4fa855926ff93445e6d.jar" />
-    </item>
-    <item
-        jar="D:\Program\AndroidSDK\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-e25da7c62a7755da88a378ba9db43ce2e7bf1590.jar" />
-    </item>
-    <item
-        jar="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\pre-dexed\debug\classes-b9225ee3e98f03b46410f47cff9ce808cdd44e69.jar" />
-    </item>
-    <item
-        jar="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-5ba54d1ba0296f32e2ca4d8ad81cf79feff6d688.jar" />
-    </item>
-    <item
-        jar="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\pre-dexed\debug\classes-7728672b4f08338589f6f39c43a9d19909f9ed74.jar" />
-    </item>
-    <item
         jar="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\exploded-aar\LightSchedule\barCode\unspecified\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="076dedd54bb7cd5a18fdc84e1be00fa590f52ecc">
+        sha1="150ef9119ca9cefde0592c896844e576badb9f32">
         <dex dex="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\pre-dexed\debug\classes-f7bb7b6e30fe2f25619823e4ad38e3f5a13dfbfe.jar" />
-    </item>
-    <item
-        jar="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\exploded-aar\LightSchedule\barCode\unspecified\jars\libs\zxing.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e88c14e6e7daa0fa65172a62b54ee6a16ff4162d">
-        <dex dex="E:\SCSE\Android\LightSchedule\lightschedule\build\intermediates\pre-dexed\debug\zxing-d4cb3997536cf97d7f625cf1f21b4c0a1133cd77.jar" />
     </item>
 
 </items>
