@@ -1,4 +1,4 @@
-<com.leafli7.lightschedule.ScrimInsetsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.leafli7.lightschedule.View.ScrimInsetsFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/navdrawer_width"
     android:layout_height="match_parent"
@@ -157,4 +157,4 @@
         </LinearLayout>
     </ScrollView>
 
-</com.leafli7.lightschedule.ScrimInsetsFrameLayout>
+</com.leafli7.lightschedule.View.ScrimInsetsFrameLayout>
