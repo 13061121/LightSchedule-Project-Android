@@ -2,6 +2,8 @@ package com.leafli7.lightschedule.Utils;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.TypedValue;
+import com.example.lightschedule.R;
 
 import com.leafli7.lightschedule.Entity.Lesson;
 import com.leafli7.lightschedule.Entity.WeekSchedule;
@@ -18,7 +20,7 @@ public abstract class Constant {
      * 即，程序中的第０周代表数据库（实际上）的第一周．
      */
     public static final String TAG = "leafli7 debug : ";
-    public static final String[] DAY_OF_WEEK = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    public static String[] DAY_OF_WEEK = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
     public static Context context;
     public static int DAY_ACCOUNT_OF_ONE_WEEK = 7;
@@ -52,6 +54,13 @@ public abstract class Constant {
         initialConfig();
         initialTime();
         initialWeekSchedule();
+//        DAY_OF_WEEK=new String[7];
+//        DAY_OF_WEEK[1]=R.string.week_day_mon;
+//        DAY_OF_WEEK[2]=R.string.week_day_tue;
+//        DAY_OF_WEEK[3]=R.string.week_day_wed;
+//        DAY_OF_WEEK[4]=R.string.week_day_thu;
+//        DAY_OF_WEEK[5]=R.string.week_day_fri;
+//        DAY_OF_WEEK[6]=R.string.week_day_sat;
     }
 
 

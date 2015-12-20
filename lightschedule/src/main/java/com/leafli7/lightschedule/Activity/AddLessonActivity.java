@@ -84,9 +84,9 @@ public class AddLessonActivity extends AppCompatActivity {
             case ADD_MODE:
                 curLesson = new Lesson();
                 initialAddModeWidgetText();
-                mToolbar.setTitle(R.string.title_activity_add_lesson);
+                mToolbar.setTitle(getText(R.string.action_add));
             case MODIFY_MODE:
-                mToolbar.setTitle(R.string.modify_lesson);
+                mToolbar.setTitle(getText(R.string.modify_lesson));
                 setEditMode(true);
                 break;
             default:
@@ -376,14 +376,14 @@ public class AddLessonActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (curMode == ADD_MODE || curMode == MODIFY_MODE) {
-            new AlertDialog.Builder(this).setTitle("Exit Editing?").setMessage("Confirm to give up?")
-                    .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            new AlertDialog.Builder(this).setTitle(getText(R.string.exitEditing)).setMessage(getText(R.string.confrimMessage))
+                    .setPositiveButton(getText(R.string.confirm), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
                         }
                     })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getText(R.string.cancel), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 

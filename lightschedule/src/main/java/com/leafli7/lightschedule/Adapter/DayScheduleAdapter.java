@@ -27,7 +27,7 @@ import java.util.ArrayList;
 /**
  * Created by xxcub on 2015/10/29.
  */
-public class DayScheduleAdapter extends BaseAdapter {
+public class DayScheduleAdapter extends BaseAdapter{
     private String TAG = Constant.TAG + getClass().getSimpleName();
 
     private Context context;
@@ -57,7 +57,7 @@ public class DayScheduleAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         String[] lessonNum = Constant.LESSON_NUM;
         String[] lessonTime = Constant.LESSON_TIME;
 
@@ -67,7 +67,7 @@ public class DayScheduleAdapter extends BaseAdapter {
         llLessonTimeNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "clicked LessonTimeNum " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.clickLessonTimeNum) + position, Toast.LENGTH_SHORT).show();
             }
         });
         //TODO : 长按添加课程
@@ -82,7 +82,7 @@ public class DayScheduleAdapter extends BaseAdapter {
                 i.putExtras(bundle);
                 context.startActivity(i);
                 Log.e(TAG, "leafli : wait for add activity!");
-                Toast.makeText(context, "long clicked LessonTimeNum " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.longClickLessonTimeNum) + position, Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -114,16 +114,16 @@ public class DayScheduleAdapter extends BaseAdapter {
                     bundle.putParcelable("lesson", lesson);
                     i.putExtras(bundle);
                     context.startActivity(i);
-                    Toast.makeText(context, "clicked lesson : " + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,context.getString(R.string.clickLesson) + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();
                 }
             });
             //长按课程删除
             lessonItemLayout.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    Toast.makeText(context, "long clicked lesson : " + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();
-                    new AlertDialog.Builder(context).setTitle("Del Lesson").setMessage("Confirm to delete the lesson?")
-                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    Toast.makeText(context, context.getString(R.string.longClickLesson) + lessonItemLayout.getLessonId(), Toast.LENGTH_SHORT).show();
+                    new AlertDialog.Builder(context).setTitle(context.getText(R.string.delLesson)).setMessage(context.getText(R.string.confirmDelete))
+                            .setPositiveButton(context.getText(R.string.confirm), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     OwnDbHelper dbHelper = new OwnDbHelper(context);
@@ -133,7 +133,7 @@ public class DayScheduleAdapter extends BaseAdapter {
                                     notifyDataSetChanged();
                                 }
                             })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(context.getText(R.string.cancel), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 

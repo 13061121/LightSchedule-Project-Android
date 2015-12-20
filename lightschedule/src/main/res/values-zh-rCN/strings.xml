@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lesson_name">课程名称</string>
+    <string name="classroom">教室</string>
+    <string name="teacher_name">教师姓名</string>
+    <string name="day_of_week">星期</string>
+    <string name="to">课程结束时间</string>
+    <string name="from">课程开始时间</string>
+    <string name="is_tiny_lesson">是否为小课</string>
+    <string name="is_alternate_weeks">是否双周</string>
+    <string name="nav_schedule">课程表</string>
+    <string name="qr">二维码</string>
+    <string name="action_add">添加课程</string>
+    <string name="click_main_schedule">打开课程表</string>
+    <string name="section_of_lesson">课程所在节数</string>
+    <string name="title_activity_add_lesson">添加课程</string>
+    <string name="action_settings">菜单</string>
+    <string name="action_modify">修改</string>
+    <string name="action_finish_modify">完成</string>
+    <string name="modify_lesson">修改课程</string>
+    <string name="week_day_sat">星期六</string>
+    <string name="week_day_sun">星期天</string>
+    <string name="week_day_thu">星期四</string>
+    <string name="week_day_tue">星期二</string>
+    <string name="week_day_wed">星期三</string>
+    <string name="week_day_mon">星期一</string>
+    <string name="week_day_fri">星期五</string>
+    <string name="odd">奇数周</string>
+    <string name="even">偶数周</string>
+    <string name="first">前一小节</string>
+    <string name="second">后一小节</string>
+    <string name="title_activity_main">Light Schedule</string>
+    <string name="app_name">LightSchedule</string>
+    <string name="view_lesson">查看课程</string>
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="exitEditing">退出编辑课程?</string>
+    <string name="confrimMessage">确定取消?</string>
+    <string name="clickLesson">点击课程: </string>
+    <string name="longClickLesson">长按课程: </string>
+    <string name="delLesson">删除课程</string>
+    <string name="confirmDelete">确认删除该课程?</string>
+    <string name="clickLessonTimeNum">点击课程号码 </string>
+    <string name="longClickLessonTimeNum">长按课程号码 </string>
+</resources>

@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "nav main schedule clicked!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, R.string.click_main_schedule, Toast.LENGTH_SHORT).show();
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_container, fragmentHashMap.get(mainScheduleFragment)).commit();
                 mDrawerLayout.closeDrawers();
             }

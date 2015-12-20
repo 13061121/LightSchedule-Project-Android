@@ -30,6 +30,26 @@
     <string name="action_finish_modify">finish</string>
     <string name="modify_lesson">Modify lesson</string>
     <string name="view_lesson">View Lesson</string>
+    <string name="nav_schedule">Main Schedule</string>
+    <string name="qr">QR</string>
+    <string name="click_main_schedule">nav main schedule clicked!</string>
+    <string name="week_day_sun">Sunday</string>
+    <string name="week_day_mon">Monday</string>
+    <string name="week_day_tue">Tuesday</string>
+    <string name="week_day_wed">Wednesday</string>
+    <string name="week_day_thu">Thursday</string>
+    <string name="week_day_fri">Friday</string>
+    <string name="week_day_sat">Saturday</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="exitEditing">Exit Editing?</string>
+    <string name="confrimMessage">Confirm to give up?</string>
+    <string name="clickLesson">clicked lesson :</string>
+    <string name="longClickLesson">long clicked lesson :</string>
+    <string name="delLesson">Delete Lesson</string>
+    <string name="confirmDelete">Confirm to delete the lesson?</string>
+    <string name="clickLessonTimeNum">clicked LessonTimeNum </string>
+    <string name="longClickLessonTimeNum">long clicked LessonTimeNum </string>
 
 
 </resources>
