@@ -4,8 +4,8 @@
     <string name="classroom">教室</string>
     <string name="teacher_name">教师姓名</string>
     <string name="day_of_week">星期</string>
-    <string name="to">课程结束时间</string>
-    <string name="from">课程开始时间</string>
+    <string name="to">课程结束周数</string>
+    <string name="from">课程开始周数</string>
     <string name="is_tiny_lesson">是否为小课</string>
     <string name="is_alternate_weeks">是否双周</string>
     <string name="nav_schedule">课程表</string>
